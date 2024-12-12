@@ -1,0 +1,22 @@
+:root {
+    --theme-color: #4f0057;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.viewport {
+    background-color: #1E1E2D;
+    flex: 1;
+    display: flex;
+}

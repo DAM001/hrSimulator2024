@@ -1,0 +1,47 @@
+.window {
+    --margin: 10px;
+    margin: var(--margin);
+    width: calc(100% - var(--margin) * 2);
+    height: calc(100% - var(--margin) * 2);
+    overflow: hidden;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.title-bar {
+    height: 40px;
+    background: var(--theme-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.title-bar .buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.title-bar .button {
+    width: 12px;
+    height: 12px;
+    background-color: #FF5F57; /* Red close button */
+}
+
+.title-bar .button.minimize {
+    background-color: #FFBD2E; /* Yellow minimize button */
+}
+
+.title-bar .button.maximize {
+    background-color: #28C93F; /* Green maximize button */
+}
+
+.window-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #FAFAFA;
+    overflow: auto;
+}

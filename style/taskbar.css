@@ -1,0 +1,40 @@
+.taskbar {
+    --taskbar-size: 40px;
+    --taskbar-padding: 5px;
+    height: var(--taskbar-size);
+    padding: var(--taskbar-padding);
+    display: flex;
+    background-color: var(--theme-color);
+
+    button {
+        margin: 0;
+        padding: 0;
+        width: var(--taskbar-size);
+        height: var(--taskbar-size);
+
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0);
+        transition: background-color .3s;
+
+        &:has(img) img {
+            width: var(--taskbar-size);
+            height: var(--taskbar-size);
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .1);
+        }
+    }
+
+    .menu {
+        height: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
+        margin-right: 10px;
+    }
+
+    .icons-folder {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+}
