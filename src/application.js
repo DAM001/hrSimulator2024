@@ -4,12 +4,11 @@ class Application {
         icon: ""
     };
     window;
+    icon;
 
     constructor(name, icon) {
         this.data.name = name;
         this.data.icon = icon;
-
-        this.createWindow();
     }
 
     createWindow() {
@@ -19,10 +18,10 @@ class Application {
             <div class="title-bar">
                 <div class="title">
                     <img class="icon" src="${this.data.icon}" />
-                    ${this.data.name}
+                    <p>${this.data.name}</p>
                 </div>
                 <div class="buttons">
-                    <div class="button">X</div>
+                    <div class="button" onclick="os.closeApplication(this)">X</div>
                 </div>
             </div>
             <div class="window-content">
@@ -31,6 +30,10 @@ class Application {
         `;
 
         this.window = windowHTML;
-        os.container.appendChild(windowHTML);
+        return windowHTML;
+    }
+
+    closeWindow() {
+
     }
 }

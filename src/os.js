@@ -9,15 +9,24 @@ class OperatingSystem {
         this.applications = [];
     }
 
-    // Open an application handling everything
     openApplication(application) {
         this.applications.push(application);
-        this.taskbar.addApplicationIcon(application);
+        os.container.appendChild(application.createWindow());
+        application.icon = this.taskbar.addApplicationIcon(application);
+    }
+
+    closeApplication(application) {
+        application.window.remove();
+        application.icon.remove();
+
+        this.applications = this.applications.filter(app => app !== application);
     }
 }
 
 const os = new OperatingSystem();
 
 
+
+// Test usage
 const testApp = new Application("Test", "../assets/business.png");
 os.openApplication(testApp);

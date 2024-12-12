@@ -13,5 +13,7 @@ class Taskbar {
         `;
 
         this.container.appendChild(appHTML);
+
+        return appHTML;
     }
 }

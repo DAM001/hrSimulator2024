@@ -17,11 +17,21 @@
         padding-left: 10px;
         align-items: center;
         justify-content: space-between;
-        font-size: 18px;
 
-        img {
-            width: 20px;
-            height: 20px;
+        .title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+    
+            p {
+                font-size: 16px;
+            }
         }
 
         .buttons {
