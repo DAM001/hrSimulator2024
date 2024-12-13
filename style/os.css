@@ -1,9 +1,10 @@
 :root {
     --background-color: #1E1E2D;
+    --font-color: #e7e7e7;
     /* THEME */
-    --theme-color: #4f0057;
+    --theme-color: #006421;
+    --theme-border-color: #498f5a;
     --theme-radius: 8px;
-    --theme-border-color: #333;
 }
 
 html, body {

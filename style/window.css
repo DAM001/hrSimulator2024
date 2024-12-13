@@ -11,7 +11,7 @@
     .title-bar {
         height: 30px;
         background: var(--theme-color);
-        color: #fff;
+        color: var(--font-color);
         display: flex;
         padding-left: 10px;
         align-items: center;

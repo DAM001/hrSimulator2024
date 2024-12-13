@@ -10,6 +10,8 @@ class OperatingSystem {
     }
 
     openApplication(application) {
+        if (this.applications.includes(application)) return;
+
         this.applications.push(application);
         os.container.appendChild(application.createWindow());
         application.icon = this.taskbar.addApplicationIcon(application);
@@ -27,5 +29,6 @@ const os = new OperatingSystem();
 
 
 // Test usage
-//const testApp = new Application("Test", "../assets/business.png");
+const testApp = new Application("SoftMicro Teams", "../assets/business.png");
+os.taskbar.addMenuIcon(testApp);
 //os.openApplication(testApp);
