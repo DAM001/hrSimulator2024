@@ -21,7 +21,7 @@ class Application {
                     <p>${this.data.name}</p>
                 </div>
                 <div class="buttons">
-                    <div class="button" onclick="os.closeApplication(this)">X</div>
+                    <div class="button close-button">X</div>
                 </div>
             </div>
             <div class="window-content">
@@ -29,11 +29,16 @@ class Application {
             </div>
         `;
 
+        windowHTML.addEventListener("click", () => {
+            os.closeApplication(this);
+        });
+
         this.window = windowHTML;
         return windowHTML;
     }
 
     closeWindow() {
-
+        this.window.remove();
+        this.icon.remove();
     }
 }

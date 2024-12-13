@@ -16,8 +16,7 @@ class OperatingSystem {
     }
 
     closeApplication(application) {
-        application.window.remove();
-        application.icon.remove();
+        application.closeWindow();
 
         this.applications = this.applications.filter(app => app !== application);
     }
