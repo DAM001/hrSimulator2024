@@ -1,5 +1,9 @@
 :root {
+    --background-color: #1E1E2D;
+    /* THEME */
     --theme-color: #4f0057;
+    --theme-radius: 8px;
+    --theme-border-color: #333;
 }
 
 html, body {
@@ -15,7 +19,20 @@ html, body {
 }
 
 .viewport {
-    background-color: #1E1E2D;
+    background-color: var(--background-color);
     flex: 1;
     display: flex;
+}
+
+.theme-style {
+    border-radius: var(--theme-radius);
+    border: solid 1px var(--theme-border-color);
+    background-color: var(--theme-color);
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(.95);
+    transform-origin: bottom left;
 }

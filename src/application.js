@@ -14,6 +14,7 @@ class Application {
     createWindow() {
         const windowHTML = document.createElement("div");
         windowHTML.className = "window";
+        windowHTML.classList.add("theme-style");
         windowHTML.innerHTML = `
             <div class="title-bar">
                 <div class="title">
@@ -29,7 +30,7 @@ class Application {
             </div>
         `;
 
-        windowHTML.addEventListener("click", () => {
+        windowHTML.querySelector(".close-button").addEventListener("click", () => {
             os.closeApplication(this);
         });
 

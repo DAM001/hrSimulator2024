@@ -18,8 +18,9 @@
         transition: background-color .3s;
 
         &:has(img) img {
-            width: var(--taskbar-size);
-            height: var(--taskbar-size);
+            width: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
+            height: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
+            padding: var(--taskbar-padding);
         }
 
         &:hover {
@@ -27,9 +28,26 @@
         }
     }
 
-    .menu {
-        height: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
+    .menu-button {
         margin-right: 10px;
+
+        img {
+            width: calc(var(--taskbar-size) - var(--taskbar-padding));
+            height: calc(var(--taskbar-size) - var(--taskbar-padding));
+            padding: calc(var(--taskbar-padding) / 2);
+        }
+    }
+
+    .menu {
+        --margin: 10px;
+        position: fixed;
+        width: 200px;
+        height: 300px;
+        bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin) - 2px);
+        left: var(--margin);
+        padding: 10px;
+
+        transition: .3s;
     }
 
     .icons-folder {

@@ -27,5 +27,5 @@ const os = new OperatingSystem();
 
 
 // Test usage
-const testApp = new Application("Test", "../assets/business.png");
-os.openApplication(testApp);
+//const testApp = new Application("Test", "../assets/business.png");
+//os.openApplication(testApp);

@@ -7,7 +7,6 @@
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
 
     .title-bar {
         height: 30px;
