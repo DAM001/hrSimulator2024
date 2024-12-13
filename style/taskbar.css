@@ -4,6 +4,7 @@
     height: var(--taskbar-size);
     padding: var(--taskbar-padding);
     display: flex;
+
     background-color: var(--theme-color);
     border-top: solid 1px var(--theme-border-color);
 

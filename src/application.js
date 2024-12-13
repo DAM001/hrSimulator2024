@@ -34,6 +34,10 @@ class Application {
             os.closeApplication(this);
         });
 
+        this.icon.addEventListener("click", () => {
+            this.toggleWindow();
+        });
+
         this.window = windowHTML;
         return windowHTML;
     }
@@ -41,5 +45,9 @@ class Application {
     closeWindow() {
         this.window.remove();
         this.icon.remove();
+    }
+
+    toggleWindow() {
+        this.window.classList.toggle("hidden");
     }
 }

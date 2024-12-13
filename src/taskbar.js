@@ -9,7 +9,7 @@ class Taskbar {
         this.setupMenuButton();
     }
 
-    setupMenuButton() {
+    setupMenuButton() {   
         const button = document.querySelector(".menu-button");
         button.addEventListener("click", () => {
             this.toggleMenu();
@@ -27,11 +27,15 @@ class Taskbar {
         return appHTML;
     }
 
+    //MENU
     toggleMenu() {
         this.menu.classList.toggle("hidden");
     }
 
-    //MENU
+    isMenuOpen() {
+        return !this.menu.classList.contains("hidden");
+    }
+    
     addMenuIcon(application) {
         const iconHTML = document.createElement("div");
         iconHTML.className = "menu-app-button";

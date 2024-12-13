@@ -4,9 +4,11 @@
     width: calc(100% - var(--margin) * 2);
     height: calc(100% - var(--margin) * 2);
     overflow: hidden;
-    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
+    
+    background-color: #FFFFFF;
+    transition: .3s;
 
     .title-bar {
         height: 30px;
