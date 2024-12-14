@@ -72,5 +72,10 @@ class Application {
     
     isWindowOpen() {
         return this.window != null;
-    }    
+    }
+    
+    sendNotification(title, description) {
+        const notification = new SystemNotification(this, title, description);
+        os.taskbar.addNotification(notification);
+    }
 }

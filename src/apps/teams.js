@@ -7,8 +7,7 @@ class Teams extends Application {
 
     sendNotifications() {
         setInterval(() => {
-            const notification = new SystemNotification(this, "Test message", "Description of the message");
-            os.taskbar.addNotification(notification);
+            this.sendNotification("Test message", "Description of the message");
         }, 10000);
     }
 }
