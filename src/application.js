@@ -9,6 +9,11 @@ class Application {
     constructor(name, icon) {
         this.data.name = name;
         this.data.icon = icon;
+
+        this.window = null;
+        this.icon = null;
+
+        os.taskbar.addMenuIcon(this);
     }
 
     createWindow() {
@@ -43,11 +48,23 @@ class Application {
     }
 
     closeWindow() {
-        this.window.remove();
-        this.icon.remove();
+        if (this.window) this.window.remove();
+        if (this.icon) this.icon.remove();
+    
+        this.window = null;
+        this.icon = null;
     }
-
+    
     toggleWindow() {
+        if (!this.isWindowOpen()) return;
         this.window.classList.toggle("hidden");
     }
+    
+    isWindowVisible() {
+        return this.isWindowOpen() && !this.window.classList.contains("hidden");
+    }
+    
+    isWindowOpen() {
+        return this.window != null;
+    }    
 }

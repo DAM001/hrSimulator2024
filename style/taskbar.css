@@ -32,6 +32,7 @@
 
     .menu-button {
         margin-right: 10px;
+        cursor: pointer;
 
         img {
             width: calc(var(--taskbar-size) - var(--taskbar-padding));
@@ -42,11 +43,23 @@
 
     .icons-folder {
         display: flex;
-        justify-content: center;
         gap: 10px;
+        width: 100%;
     }
 
-    .menu {
+    .status-bar {
+        min-width: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        color: var(--font-color);
+    }
+
+    /* POPUPS */
+
+    .taskbar-menu {
         --margin: 10px;
         position: fixed;
         bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
@@ -55,6 +68,11 @@
 
         color: var(--font-color);
         transition: .3s;
+
+        .description {
+            margin: 0 0 5px;
+            font-weight: 900;
+        }
 
         .menu-app-button {
             display: flex;
@@ -71,6 +89,77 @@
 
             &:hover {
                 background-color: var(--theme-border-color);
+            }
+        }
+    }
+
+    .status-bar-menu {
+        --margin: 10px;
+        position: fixed;
+        bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
+        right: var(--margin);
+        padding: 10px 5px 10px;
+
+        color: var(--font-color);
+        transition: .3s;
+
+        width: 300px;
+        min-height: 400px;
+        max-height: calc(100dvh - 90px);
+
+        .description {
+            margin: 0 5px 5px;
+            font-weight: 900;
+        }
+
+        .notifications-folder {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 5px;
+
+            max-height: calc(100dvh - 120px);
+            overflow-y: auto;
+
+            .notification {
+                padding: 10px;
+                position: relative;
+                
+                cursor: pointer;
+                background-color: rgba(255, 255, 255, 0);
+                transition: background-color .3s;
+                
+                &:hover {
+                    background-color: rgba(255, 255, 255, .1);
+
+                    .close-button {
+                        opacity: 1;
+                    }
+                }
+
+                h1 {
+                    margin: 0 0 5px;
+                    font-size: 18px;
+                }
+
+                p {
+                    margin: 0;
+                }
+
+                .close-button {
+                    width: 50px;
+                    height: 20px;
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    
+                    color: white;
+                    font-size: 12px;
+                    cursor: pointer;
+
+                    opacity: 0;
+                    transition: .2s;
+                }
             }
         }
     }

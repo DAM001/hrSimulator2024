@@ -17,8 +17,15 @@
     </div>
 
     <div class="taskbar">
-        <div class="menu theme-style hidden">
-            <div class="menu-apps"></div>
+        <div class="taskbar-menu theme-style hidden">
+            <div class="menu-apps">
+                <p class="description">Applications</p>
+            </div>
+        </div>
+
+        <div class="status-bar-menu theme-style hidden">
+            <p class="description">Notifications</p>
+            <div class="notifications-folder"></div>
         </div>
 
         <!-- Buttons -->
@@ -26,11 +33,16 @@
             <img src="./assets/menu.png" alt="">
         </button>
         <div class="icons-folder"></div>
-        <div class="status-bar"></div>
+        <div class="status-bar">
+            <div class="clock">
+                11:11
+            </div>
+        </div>
     </div>
 
     <script src="./src/application.js"></script>
     <script src="./src/taskbar.js"></script>
+    <script src="./src/notification.js"></script>
     <script src="./src/os.js"></script>
 </body>
 
