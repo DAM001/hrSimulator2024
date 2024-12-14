@@ -6,21 +6,22 @@ class OperatingSystem {
     constructor() {
         this.container = document.querySelector(".viewport");
         this.taskbar = new Taskbar();
-        this.applications = [];
+        this.applications = new Map();
     }
 
     openApplication(application) {
-        if (this.applications.includes(application)) return;
-        this.applications.push(application);
+        if (this.applications.has(application.data.name)) return; // Check by name as key
+        this.applications.set(application.data.name, application); // Add to Map
 
         application.icon = this.taskbar.addApplicationIcon(application);
-        os.container.appendChild(application.createWindow());
+        this.container.appendChild(application.createWindow());
     }
 
     closeApplication(application) {
-        application.closeWindow();
+        if (!this.applications.has(application.data.name)) return;
 
-        this.applications = this.applications.filter(app => app !== application);
+        application.closeWindow();
+        this.applications.delete(application.data.name); // Remove from Map
     }
 }
 
