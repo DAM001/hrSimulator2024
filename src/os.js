@@ -10,18 +10,16 @@ class OperatingSystem {
     }
 
     openApplication(application) {
-        if (this.applications.has(application.data.name)) return; // Check by name as key
-        this.applications.set(application.data.name, application); // Add to Map
+        if (application.isOpen) return;
 
         application.icon = this.taskbar.addApplicationIcon(application);
         this.container.appendChild(application.createWindow());
     }
 
     closeApplication(application) {
-        if (!this.applications.has(application.data.name)) return;
+        if (application.isOpen) return;
 
         application.closeWindow();
-        this.applications.delete(application.data.name); // Remove from Map
     }
 }
 

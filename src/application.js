@@ -6,8 +6,10 @@ class Application {
     window;
     icon;
     content;
+    isOpen;
 
     constructor(name, icon) {
+        this.isOpen = false;
         this.data.name = name;
         this.data.icon = icon;
 
@@ -15,6 +17,8 @@ class Application {
         this.icon = null;
 
         os.taskbar.addMenuIcon(this);
+
+        os.applications.set(name, this);
     }
 
     createWindow() {
