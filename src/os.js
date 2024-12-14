@@ -26,7 +26,7 @@ class OperatingSystem {
 // Setup applications
 const os = new OperatingSystem();
 
-const softMicroTeams = new Application("SoftMicro Teams", "./assets/business.png");
+const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
 const insideLook = new Application("InsideLook", "./assets/email.png");
 
 const notification = new SystemNotification(softMicroTeams, "UR BOSS sent a message", "Fuck you m8, u are fired!");
