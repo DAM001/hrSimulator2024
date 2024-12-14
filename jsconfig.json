@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "checkJs": true, // Enables type checking for JavaScript
+    },
+    "include": ["**/*.js"] // Ensures all JavaScript files are included
+}
+  
