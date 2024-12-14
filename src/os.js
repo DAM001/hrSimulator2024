@@ -10,16 +10,23 @@ class OperatingSystem {
     }
 
     openApplication(application) {
-        if (application.isOpen) return;
+        if (application.isOpen) {
+            if (!application.isWindowVisible()){
+                application.toggleWindow();
+            }
+            return;
+        }
 
         application.icon = this.taskbar.addApplicationIcon(application);
         this.container.appendChild(application.createWindow());
+        application.isOpen=true
     }
 
     closeApplication(application) {
-        if (application.isOpen) return;
+        if (!application.isOpen) return;
 
         application.closeWindow();
+        application.isOpen=false
     }
 }
 
