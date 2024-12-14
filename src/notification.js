@@ -6,6 +6,7 @@ class SystemNotification {
         description: ""
     };
     statusBarElement;
+    popupElement;
 
     constructor(application, title, description) {
         this.id = `${application.data.name}-${Date.now()}`; // Unique ID based on app name and timestamp
@@ -22,12 +23,13 @@ class SystemNotification {
     }
 
     createPopupNotification() {
-        const popupElement = this.createNotificationElement();
+        const notificationHTML = this.createNotificationElement();
         setTimeout(() => {
-            popupElement.remove();
+            notificationHTML.remove();
         }, 5000);
 
-        return popupElement;
+        this.popupElement = notificationHTML;
+        return notificationHTML;
     }
 
     createNotificationElement() {
@@ -61,5 +63,6 @@ class SystemNotification {
 
     deleteNotification() {
         this.statusBarElement.remove();
+        if (this.popupElement != null) this.popupElement.remove();
     }
 }

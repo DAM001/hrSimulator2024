@@ -76,8 +76,8 @@ class Taskbar {
     }
 
     addNotification(notification) {
-        if (this.notifications.has(notification.id)) return; // Check if notification already exists
-        this.notifications.set(notification.id, notification); // Add notification to the Map
+        if (this.notifications.has(notification.id)) return;
+        this.notifications.set(notification.id, notification);
         const popupNotification = notification.createPopupNotification();
         document.querySelector(".popup-notifications-folder").appendChild(popupNotification);
 
@@ -87,12 +87,9 @@ class Taskbar {
     }
 
     deleteNotification(notification) {
-        if (!this.notifications.has(notification.id)) return; // Ensure notification exists
-
-        // Call the delete method on the notification
-        notification.deleteNotification();
-
-        // Remove from the Map
+        if (!this.notifications.has(notification.id)) return;
         this.notifications.delete(notification.id);
+
+        notification.deleteNotification();
     }
 }
