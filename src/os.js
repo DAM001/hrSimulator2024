@@ -30,5 +30,5 @@ const os = new OperatingSystem();
 const softMicroTeams = new Application("SoftMicro Teams", "./assets/business.png");
 const insideLook = new Application("InsideLook", "./assets/email.png");
 
-const notification = new Notification(softMicroTeams, "UR BOSS sent a message", "Fuck you m8, u are fired!");
-const notification2 = new Notification(insideLook, "You got mail", "Yo! Boss is upset, you fucked up really big this time!");
+const notification = new SystemNotification(softMicroTeams, "UR BOSS sent a message", "Fuck you m8, u are fired!");
+const notification2 = new SystemNotification(insideLook, "You got mail", "Yo! Boss is upset, you fucked up really big this time!");

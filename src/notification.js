@@ -1,11 +1,10 @@
-class Notification {
+class SystemNotification {
     application;
     data = {
         title: "Notification",
         description: ""
     };
     statusBarElement;
-    popupElement;
 
     constructor(application, title, description) {
         this.application = application;
@@ -22,8 +21,12 @@ class Notification {
     }
 
     createPopupNotification() {
-        this.popupElement = this.createNotificationElement();
-        return this.popupElement;
+        const popupElement = this.createNotificationElement();
+        setTimeout(() => {
+            popupElement.remove();
+        }, 5000);
+
+        return popupElement;
     }
 
     createNotificationElement() {
@@ -40,7 +43,7 @@ class Notification {
             e.stopPropagation();
             os.taskbar.deleteNotification(this);
         });
-        
+
         notificationHTML.addEventListener("click", () => {
             if (!this.application.isWindowOpen()) {
                 os.openApplication(this.application);

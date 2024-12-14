@@ -79,6 +79,9 @@ class Taskbar {
         if (this.notifications.includes(notification)) return;
         this.notifications.push(notification);
 
+        const popupNotification = notification.createPopupNotification();
+        document.querySelector(".popup-notifications-folder").appendChild(popupNotification);
+
         const notificationHTML = notification.createStatusBarNotification();
         this.statusBarMenu.querySelector(".notifications-folder").appendChild(notificationHTML);
         return notificationHTML;
