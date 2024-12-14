@@ -9,7 +9,7 @@ class Taskbar {
         this.taskbarMenu = document.querySelector(".taskbar-menu");
         this.statusBarMenu = document.querySelector(".status-bar-menu");
 
-        this.notifications = [];
+        this.notifications = new Map();;
 
         this.setupMenuButton();
         this.setupStatusBarMenuButton();
@@ -76,9 +76,8 @@ class Taskbar {
     }
 
     addNotification(notification) {
-        if (this.notifications.includes(notification)) return;
-        this.notifications.push(notification);
-
+        if (this.notifications.has(notification.id)) return; // Check if notification already exists
+        this.notifications.set(notification.id, notification); // Add notification to the Map
         const popupNotification = notification.createPopupNotification();
         document.querySelector(".popup-notifications-folder").appendChild(popupNotification);
 
@@ -88,8 +87,12 @@ class Taskbar {
     }
 
     deleteNotification(notification) {
+        if (!this.notifications.has(notification.id)) return; // Ensure notification exists
+
+        // Call the delete method on the notification
         notification.deleteNotification();
 
-        this.notifications = this.notifications.filter(not => not !== notification);
+        // Remove from the Map
+        this.notifications.delete(notification.id);
     }
 }

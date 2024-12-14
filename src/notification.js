@@ -1,4 +1,5 @@
 class SystemNotification {
+    id;
     application;
     data = {
         title: "Notification",
@@ -7,8 +8,8 @@ class SystemNotification {
     statusBarElement;
 
     constructor(application, title, description) {
+        this.id = `${application.data.name}-${Date.now()}`; // Unique ID based on app name and timestamp
         this.application = application;
-
         this.data.title = title;
         this.data.description = description;
 
