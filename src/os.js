@@ -14,12 +14,14 @@ class OperatingSystem {
 
         application.icon = this.taskbar.addApplicationIcon(application);
         this.container.appendChild(application.createWindow());
+        application.isOpen=true
     }
 
     closeApplication(application) {
         if (application.isOpen) return;
 
         application.closeWindow();
+        application.isOpen=false
     }
 }
 
