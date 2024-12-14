@@ -11,3 +11,6 @@ class Teams extends Application {
         }, 10000);
     }
 }
+
+const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
+const notification = new SystemNotification(softMicroTeams, "UR BOSS sent a message", "Fuck you m8, u are fired!");
