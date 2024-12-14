@@ -32,6 +32,7 @@ class Application {
                     <p>${this.data.name}</p>
                 </div>
                 <div class="buttons">
+                    <div class="button minimize-button">&ndash;</div>
                     <div class="button close-button">X</div>
                 </div>
             </div>
@@ -39,6 +40,10 @@ class Application {
                 Content goes here...
             </div>
         `;
+
+        windowHTML.querySelector(".minimize-button").addEventListener("click", () => {
+            this.toggleWindow();
+        });
 
         windowHTML.querySelector(".close-button").addEventListener("click", () => {
             os.closeApplication(this);

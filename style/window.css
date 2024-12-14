@@ -37,7 +37,6 @@
 
         .buttons {
             display: flex;
-            gap: 8px;
         }
         
         .button {
@@ -54,6 +53,12 @@
                 background-color: red;
             }
         }
+
+        .minimize-button {
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }        
     }
 
     .window-content {
