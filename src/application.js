@@ -5,6 +5,7 @@ class Application {
     };
     window;
     icon;
+    content;
 
     constructor(name, icon) {
         this.data.name = name;
@@ -43,6 +44,7 @@ class Application {
             this.toggleWindow();
         });
 
+        this.content = windowHTML.querySelector(".window-content");
         this.window = windowHTML;
         return windowHTML;
     }
