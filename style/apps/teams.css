@@ -1,26 +1,46 @@
 .window-content-teams {
+    --background-color: #1f1f1f;
+    --secondary-background-color: #1a1a1a;
+    --selected-color: #242424;
+    --border-color: #313131;
     display: flex;
     height: 100%;
+    background: var(--background-color);
+    color: #fff;
 
     .sidebar {
-        width: 20%;
-        background: #2f3136;
-        color: #fff;
+        width: 30%;
+        background: var(--secondary-background-color);
+        border-right: solid 1px var(--border-color);
         display: flex;
         flex-direction: column;
-        padding: 1rem;
+        padding: 5px;
     
-        .channel {
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
-            background: #3a3b3f;
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            padding: 5px;
+            background: transparent;
             border-radius: 5px;
             cursor: pointer;
-            text-align: center;
 
             &:hover {
-                background: #4a4b50;
+                background: var(--selected-color);
+                box-shadow: 0 0 0 1px var(--border-color);
             }
+
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+
+        .active {
+            background: var(--selected-color);
+            box-shadow: 0 0 0 1px var(--border-color);
         }
     }
     
@@ -35,40 +55,53 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 20px;
         
             .message {
-                background: #e1e1e1;
-                padding: 0.5rem 1rem;
+                background: var(--selected-color);
+                padding: 10px;
                 border-radius: 5px;
-                max-width: 60%;
+                max-width: 70%;
+                position: relative;
+                font-size: 14px;
+
+                span {
+                    font-size: 10px;
+                    position: absolute;
+                    top: -12px;
+                    left: 2px;
+                    color: gray;
+                }
             }
         }
         
         .input-bar {
             display: flex;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: #fff;
-            border-top: 1px solid #ccc;
+            padding: 20px;
         
             input {
                 flex: 1;
-                padding: 0.5rem;
-                border: 1px solid #ccc;
-                border-radius: 5px;
+                padding: 10px;
+                box-shadow: 0 0 0 1px var(--border-color);
+                background-color: var(--selected-color);
+                border-radius: 5px 0 0 5px;
+                color: #fff;
+                outline: none;
+                border: none;
             }
         
             button {
-                padding: 0.5rem 1rem;
-                background: #0078d7;
+                margin: 0;
+                padding: 10px;
                 color: #fff;
+                background-color: var(--selected-color);
+                box-shadow: 0 0 0 1px var(--border-color);
                 border: none;
-                border-radius: 5px;
+                border-radius: 0 5px 5px 0;
                 cursor: pointer;
-    
+
                 &:hover {
-                    background: #005bb5;
+                    background-color: var(--border-color);
                 }
             }
         }
