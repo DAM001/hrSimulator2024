@@ -15,13 +15,6 @@ class Outlook extends Application {
         this.currentFolder = "inbox";
         this.currentEmail = null;
         this.sendView = false;
-        this.setupNotifications();
-    }
-
-    setupNotifications() {
-        setInterval(() => {
-            this.sendNotification("New Email Received", "Subject: Update on Project Status");
-        }, 20000);
     }
 
     createWindow() {
@@ -119,16 +112,18 @@ class Outlook extends Application {
 
     renderComposeView(type = "new") {
         const emailList = this.content.querySelector("#email-list");
+    
         let to = "", cc = "", subject = "", content = "";
         if (type === "reply") {
-            to = this.currentEmail.from;
+            to = this.currentEmail.from; // Set the 'to' field to the original sender
+            cc = this.currentEmail.cc; // Copy the original CC
             subject = `Re: ${this.currentEmail.subject}`;
-            content = `\n\n---\n${this.currentEmail.content}`;
+            content = `\n\n---\nFrom: ${this.currentEmail.from}\nDate: ${this.currentEmail.date}\n\n${this.currentEmail.content}`;
         } else if (type === "forward") {
             subject = `Fwd: ${this.currentEmail.subject}`;
-            content = `\n\n---\n${this.currentEmail.content}`;
+            content = `\n\n---\nFrom: ${this.currentEmail.from}\nDate: ${this.currentEmail.date}\n\n${this.currentEmail.content}`;
         }
-
+    
         emailList.innerHTML = `
             <h2>Compose Email</h2>
             <div class="compose-form">
@@ -140,13 +135,13 @@ class Outlook extends Application {
                 <button id="cancel-btn">Cancel</button>
             </div>
         `;
-
+    
         this.content.querySelector("#send-email-btn").addEventListener("click", () => {
             const to = this.content.querySelector("#email-to").value;
             const cc = this.content.querySelector("#email-cc").value;
             const subject = this.content.querySelector("#email-subject").value;
             const content = this.content.querySelector("#email-content").value;
-
+    
             if (to && subject && content) {
                 this.folders.sent.push(new Email({ to, cc, subject, content, folder: "sent" }));
                 this.currentFolder = "sent";
@@ -155,9 +150,10 @@ class Outlook extends Application {
                 alert("Please fill out all fields.");
             }
         });
-
+    
         this.content.querySelector("#cancel-btn").addEventListener("click", () => this.renderEmails());
     }
+    
 }
 
 class Email {
