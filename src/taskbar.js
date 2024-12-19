@@ -13,8 +13,24 @@ class Taskbar {
 
         this.setupMenuButton();
         this.setupStatusBarMenuButton();
+        this.setupClearAllNotificationsButton();
+        this.setupClickAwayHandler();
     }
 
+    setupClickAwayHandler() {
+        document.addEventListener("click", (e) => {
+            if (!(e.target instanceof Node)) return;
+            
+            if (this.isMenuOpen() && !this.taskbarMenu.contains(e.target) && !document.querySelector(".menu-button")?.contains(e.target)) {
+                this.toggleMenu();
+            }
+
+            if (this.isStatusBarMenuOpen() && !this.statusBarMenu.contains(e.target) && !document.querySelector(".status-bar")?.contains(e.target)) {
+                this.toggleStatusBarMenu();
+            }
+        });
+    }
+    
     addApplicationIcon(application) {
         const appHTML = document.createElement("button");
         appHTML.className = "icon";
@@ -64,6 +80,15 @@ class Taskbar {
         const button = document.querySelector(".status-bar");
         button.addEventListener("click", () => {
             this.toggleStatusBarMenu();
+        });
+    }
+
+    setupClearAllNotificationsButton() {
+        const button = document.querySelector(".notifications-clear-button");
+        button.addEventListener("click", () => {
+            this.notifications.forEach(notification => {
+                this.deleteNotification(notification);
+            });
         });
     }
 
