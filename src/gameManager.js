@@ -72,7 +72,7 @@ class GameManager {
     }
 }
 
-// Initilize everything
+// Main
 const gameManager = new GameManager();
 const os = new OperatingSystem();
 
@@ -81,7 +81,7 @@ const outlook = new Outlook("Outlook", "./assets/email.png");
 const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
 
 //Test Data
-// Initialize Teams App
+//Teams Notifications
 softMicroTeams.addUser(new TeamsUser("BOSS", "./assets/email.png"));
 softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
 
@@ -89,5 +89,10 @@ softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
 softMicroTeams.sendMessageToUser({ user: "BOSS", content: "Hello Boss, this is a test message!" });
 softMicroTeams.sendMessageToUser({ user: "CEO", content: "CEO, you've got a system notification!" });
 
+// Add example emails
+outlook.addEmail(new Email({ from: "Boss", subject: "Finish the report ASAP!", content: "Please send it before EOD!" }));
+outlook.addEmail(new Email({ from: "HR", subject: "Meeting Reminder", content: "Meeting scheduled at 3 PM today." }));
+outlook.addEmail(new Email({ from: "Team Lead", subject: "Code Review", content: "Please review the latest merge request." }), "inbox");
+outlook.addEmail(new Email({ from: "Nigerian Prince", subject: "You Won $1M!", content: "Send us your bank details to claim." }), "spam");
 
 gameManager.startClock();
