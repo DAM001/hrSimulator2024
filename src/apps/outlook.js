@@ -96,11 +96,13 @@ class Outlook extends Application {
         }
         this.folders[folder].push(email);
         console.log(`Email added to ${folder} folder:`, email);
-
+    
         if (this.isWindowOpen() && this.currentFolder === folder) {
             this.renderEmails();
         }
-    }
+    
+        this.sendNotification(`New Email from ${email.from}`, email.subject);
+    }    
 
     renderComposeView(type = "new") {
         const emailList = this.content.querySelector("#email-list");
@@ -175,7 +177,7 @@ class Email {
             ${this.cc ? `<p><strong>CC:</strong> ${this.cc}</p>` : ""}
             <p><strong>Date:</strong> ${this.date}</p>
             <p><strong>Content:</strong></p>
-            <p>${this.content}</p>
+            <div class="email-content-text">${this.content}</div>
         `;
-    }
+    }    
 }

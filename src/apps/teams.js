@@ -95,7 +95,7 @@ class Teams extends Application {
             targetUser.addMessage(message);
 
             // Send notification
-            this.sendNotification(`New Message for ${targetUser.name}`, content);
+            this.sendNotification(`New Message from ${targetUser.name}`, content);
 
             // Reload messages if the target user is currently selected
             if (this.selectedUser === targetUser) {
