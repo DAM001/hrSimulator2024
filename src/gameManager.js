@@ -3,12 +3,12 @@ class GameManager {
         this.currentTime = new Date(0, 0, 0, 9, 0, 0); // Start at 9:00 AM
         this.endTime = new Date(0, 0, 0, 17, 0, 0); // End at 5:00 PM
         this.interval = null;
+        this.notifications = new Map(); // Store notifications
     }
 
     startClock() {
         const clockElement = document.querySelector(".clock");
 
-        // Update clock every second
         this.interval = setInterval(() => {
             this.currentTime.setMinutes(this.currentTime.getMinutes() + 1);
 
@@ -44,7 +44,50 @@ class GameManager {
     onDayEnd() {
         alert("The workday has ended!");
     }
+
+    addNotification(notification) {
+        if (this.notifications.has(notification.id)) return;
+
+        this.notifications.set(notification.id, notification);
+        console.log(`Notification added: ${notification.data.title}`);
+
+        const taskbar = os.taskbar;
+        taskbar.addNotification(notification);
+    }
+
+    deleteNotification(notificationId) {
+        if (!this.notifications.has(notificationId)) return;
+
+        this.notifications.get(notificationId).deleteNotification();
+        this.notifications.delete(notificationId);
+        console.log(`Notification removed: ${notificationId}`);
+    }
+
+    clearNotifications() {
+        this.notifications.forEach((notification) => {
+            notification.deleteNotification();
+        });
+        this.notifications.clear();
+        console.log("All notifications cleared.");
+    }
 }
 
+// Initilize everything
 const gameManager = new GameManager();
+const os = new OperatingSystem();
+
+//Apps
+const outlook = new Outlook("Outlook", "./assets/email.png");
+const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
+
+//Test Data
+// Initialize Teams App
+softMicroTeams.addUser(new TeamsUser("BOSS", "./assets/email.png"));
+softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
+
+// Example usage of the new function
+softMicroTeams.sendMessageToUser({ user: "BOSS", content: "Hello Boss, this is a test message!" });
+softMicroTeams.sendMessageToUser({ user: "CEO", content: "CEO, you've got a system notification!" });
+
+
 gameManager.startClock();

@@ -188,6 +188,3 @@ class Email {
         `;
     }
 }
-
-
-const outlook = new Outlook("Outlook", "./assets/email.png");
