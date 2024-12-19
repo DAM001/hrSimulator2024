@@ -13,6 +13,7 @@ class Taskbar {
 
         this.setupMenuButton();
         this.setupStatusBarMenuButton();
+        this.setupClearAllNotificationsButton();
         this.startClock();
     }
 
@@ -75,6 +76,15 @@ class Taskbar {
         const button = document.querySelector(".status-bar");
         button.addEventListener("click", () => {
             this.toggleStatusBarMenu();
+        });
+    }
+
+    setupClearAllNotificationsButton() {
+        const button = document.querySelector(".notifications-clear-button");
+        button.addEventListener("click", () => {
+            this.notifications.forEach(notification => {
+                this.deleteNotification(notification);
+            });
         });
     }
 
