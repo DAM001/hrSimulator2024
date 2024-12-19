@@ -2,7 +2,7 @@
     "compilerOptions": {
         "checkJs": true, // Enables type checking for JavaScript
         "target": "es2015", // Ensures TypeScript compiles to ES2015
-        "lib": ["dom", "es2015"], // Includes ES2015 and DOM libraries for better IntelliSense
+        "lib": ["dom", "es2015", "es2017"], // Includes ES2015 and DOM libraries for better IntelliSense
         "allowJs": true // Allows working with JavaScript files in the project
     },
     "include": ["**/*.js"] // Ensures all JavaScript files are included
