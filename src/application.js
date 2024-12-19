@@ -7,12 +7,15 @@ class Application {
     icon;
     content;
     isOpen;
+    activeNotifications;
     isAnimating = false;
 
     constructor(name, icon) {
         this.isOpen = false;
         this.data.name = name;
         this.data.icon = icon;
+
+        this.activeNotifications = new Map();
 
         this.window = null;
         this.icon = null;
@@ -112,5 +115,6 @@ class Application {
     sendNotification(title, description) {
         const notification = new SystemNotification(this, title, description);
         os.taskbar.addNotification(notification);
+        this. activeNotifications
     }
 }

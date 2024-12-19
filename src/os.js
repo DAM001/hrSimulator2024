@@ -43,7 +43,3 @@ class OperatingSystem {
         application.isOpen=false
     }
 }
-
-// Setup applications
-const os = new OperatingSystem();
-

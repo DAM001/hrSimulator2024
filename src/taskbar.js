@@ -14,7 +14,6 @@ class Taskbar {
         this.setupMenuButton();
         this.setupStatusBarMenuButton();
         this.setupClearAllNotificationsButton();
-        this.startClock();
         this.setupClickAwayHandler();
     }
 
@@ -32,18 +31,6 @@ class Taskbar {
         });
     }
     
-    
-
-    startClock() {
-        const clockElement = document.querySelector(".clock");
-        setInterval(() => {
-            const now = new Date();
-            const hours = (now.getHours() < 10 ? '0' : '') + now.getHours();
-            const minutes = (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
-            clockElement.textContent = `${hours}:${minutes}`;
-        }, 1000); // Update every second
-    }    
-
     addApplicationIcon(application) {
         const appHTML = document.createElement("button");
         appHTML.className = "icon";

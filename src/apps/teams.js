@@ -148,12 +148,3 @@ class TeamsMessage {
         this.data.time = Date.now();
     }
 }
-
-// Initialize Teams App
-const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
-softMicroTeams.addUser(new TeamsUser("BOSS", "./assets/email.png"));
-softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
-
-// Example usage of the new function
-softMicroTeams.sendMessageToUser({ user: "BOSS", content: "Hello Boss, this is a test message!" });
-softMicroTeams.sendMessageToUser({ user: "CEO", content: "CEO, you've got a system notification!" });
