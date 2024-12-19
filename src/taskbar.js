@@ -15,7 +15,24 @@ class Taskbar {
         this.setupStatusBarMenuButton();
         this.setupClearAllNotificationsButton();
         this.startClock();
+        this.setupClickAwayHandler();
     }
+
+    setupClickAwayHandler() {
+        document.addEventListener("click", (e) => {
+            if (!(e.target instanceof Node)) return;
+            
+            if (this.isMenuOpen() && !this.taskbarMenu.contains(e.target) && !document.querySelector(".menu-button")?.contains(e.target)) {
+                this.toggleMenu();
+            }
+
+            if (this.isStatusBarMenuOpen() && !this.statusBarMenu.contains(e.target) && !document.querySelector(".status-bar")?.contains(e.target)) {
+                this.toggleStatusBarMenu();
+            }
+        });
+    }
+    
+    
 
     startClock() {
         const clockElement = document.querySelector(".clock");
