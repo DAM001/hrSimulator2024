@@ -2,11 +2,13 @@ class OperatingSystem {
     container;
     taskbar;
     applications;
+    settings;
 
     constructor() {
         this.container = document.querySelector(".viewport");
         this.taskbar = new Taskbar();
         this.applications = new Map();
+        this.settings = new Settings();
     }
 
     openApplication(application) {
@@ -20,6 +22,18 @@ class OperatingSystem {
         application.icon = this.taskbar.addApplicationIcon(application);
         this.container.appendChild(application.createWindow());
         application.isOpen=true
+
+        let visibleWindowCount = 0;
+        this.applications.forEach((app) => {
+            if (app.isOpen && app.isWindowVisible()) {
+                visibleWindowCount++;
+            }
+        });
+
+        if (this.settings.upgrades.maxAllowedWindows > visibleWindowCount)
+        {
+            application.toggleWindow();
+        }
     }
 
     closeApplication(application) {

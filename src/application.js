@@ -8,6 +8,7 @@ class Application {
     content;
     isOpen;
     activeNotifications;
+    isAnimating = false;
 
     constructor(name, icon) {
         this.isOpen = false;
@@ -28,6 +29,7 @@ class Application {
         const windowHTML = document.createElement("div");
         windowHTML.className = "window";
         windowHTML.classList.add("theme-style");
+        windowHTML.classList.add("hidden");
         windowHTML.innerHTML = `
             <div class="title-bar">
                 <div class="title">
@@ -56,6 +58,11 @@ class Application {
             this.toggleWindow();
         });
 
+        //animate when open
+        setTimeout(() => {
+            this.toggleWindow();
+        }, 0);
+
         this.content = windowHTML.querySelector(".window-content");
         this.window = windowHTML;
         return windowHTML;
@@ -71,8 +78,31 @@ class Application {
     
     toggleWindow() {
         if (!this.isWindowOpen()) return;
+    
+        const animLength = 300;
+        const isHidden = this.window.classList.contains("hidden");
+    
+        if (this.isAnimating) return;
+    
+        this.isAnimating = true;
+        this.window.style.width = "0";
+
+        if (isHidden) {
+            this.window.style.removeProperty("display");
+            setTimeout(() => {
+                this.isAnimating = false;
+                this.window.style.width = "100%";
+            }, 0);
+        } else {
+            setTimeout(() => {
+                this.isAnimating = false;
+                this.window.style.display = "none";
+            }, animLength);
+        }
+
         this.window.classList.toggle("hidden");
     }
+    
     
     isWindowVisible() {
         return this.isWindowOpen() && !this.window.classList.contains("hidden");
