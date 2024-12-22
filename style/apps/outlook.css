@@ -28,6 +28,11 @@
     overflow-y: auto;
 }
 
+.email-content-text {
+    white-space: pre-wrap; /* Preserves line breaks and wraps text */
+    word-wrap: break-word; /* Ensures long words are wrapped */
+}
+
 .email-list h2 {
     margin: 0 0 10px;
 }

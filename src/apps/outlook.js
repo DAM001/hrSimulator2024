@@ -2,15 +2,9 @@ class Outlook extends Application {
     constructor(name, icon) {
         super(name, icon);
         this.folders = {
-            inbox: [
-                new Email({ from: "Boss", subject: "Finish the report ASAP!", content: "Please send it before EOD!" }),
-                new Email({ from: "HR", subject: "Meeting Reminder", content: "Meeting scheduled at 3 PM today." }),
-                new Email({ from: "Team Lead", subject: "Code Review", content: "Please review the latest merge request." })
-            ],
+            inbox: [],
             sent: [],
-            spam: [
-                new Email({ from: "Nigerian Prince", subject: "You Won $1M!", content: "Send us your bank details to claim." })
-            ]
+            spam: []
         };
         this.currentFolder = "inbox";
         this.currentEmail = null;
@@ -95,35 +89,35 @@ class Outlook extends Application {
         this.content.querySelector("#back-btn").addEventListener("click", () => this.renderEmails());
     }
 
-    recieveEmail({ to, cc = "", subject, content, folder = "inbox" }) {
-        if (!to || !subject || !content) {
-            console.error("Missing required fields: to, subject, and content.");
+    addEmail(email, folder = "inbox") {
+        if (!this.folders[folder]) {
+            console.error(`Invalid folder: ${folder}`);
             return;
         }
-    
-        const newEmail = new Email({ to, cc, subject, content, folder });
-        this.folders[folder].push(newEmail);
-        console.log(`Email added to ${folder} folder:`, newEmail);
+        this.folders[folder].push(email);
+        console.log(`Email added to ${folder} folder:`, email);
     
         if (this.isWindowOpen() && this.currentFolder === folder) {
             this.renderEmails();
         }
+    
+        this.sendNotification(`New Email from ${email.from}`, email.subject);
     }    
 
     renderComposeView(type = "new") {
         const emailList = this.content.querySelector("#email-list");
-    
+
         let to = "", cc = "", subject = "", content = "";
         if (type === "reply") {
-            to = this.currentEmail.from; // Set the 'to' field to the original sender
-            cc = this.currentEmail.cc; // Copy the original CC
+            to = this.currentEmail.from;
+            cc = this.currentEmail.cc;
             subject = `Re: ${this.currentEmail.subject}`;
             content = `\n\n---\nFrom: ${this.currentEmail.from}\nDate: ${this.currentEmail.date}\n\n${this.currentEmail.content}`;
         } else if (type === "forward") {
             subject = `Fwd: ${this.currentEmail.subject}`;
             content = `\n\n---\nFrom: ${this.currentEmail.from}\nDate: ${this.currentEmail.date}\n\n${this.currentEmail.content}`;
         }
-    
+
         emailList.innerHTML = `
             <h2>Compose Email</h2>
             <div class="compose-form">
@@ -135,25 +129,24 @@ class Outlook extends Application {
                 <button id="cancel-btn">Cancel</button>
             </div>
         `;
-    
+
         this.content.querySelector("#send-email-btn").addEventListener("click", () => {
             const to = this.content.querySelector("#email-to").value;
             const cc = this.content.querySelector("#email-cc").value;
             const subject = this.content.querySelector("#email-subject").value;
             const content = this.content.querySelector("#email-content").value;
-    
+
             if (to && subject && content) {
-                this.folders.sent.push(new Email({ to, cc, subject, content, folder: "sent" }));
+                this.addEmail(new Email({ to, cc, subject, content }), "sent");
                 this.currentFolder = "sent";
                 this.renderEmails();
             } else {
                 alert("Please fill out all fields.");
             }
         });
-    
+
         this.content.querySelector("#cancel-btn").addEventListener("click", () => this.renderEmails());
     }
-    
 }
 
 class Email {
@@ -184,7 +177,7 @@ class Email {
             ${this.cc ? `<p><strong>CC:</strong> ${this.cc}</p>` : ""}
             <p><strong>Date:</strong> ${this.date}</p>
             <p><strong>Content:</strong></p>
-            <p>${this.content}</p>
+            <div class="email-content-text">${this.content}</div>
         `;
-    }
+    }    
 }
