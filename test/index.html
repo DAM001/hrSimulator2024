@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Snap</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .window {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: grab;
+        }
+
+        .window:active {
+            cursor: grabbing;
+        }
+
+        .snap-preview {
+            position: absolute;
+            background-color: rgba(0, 0, 255, 0.2);
+            z-index: -1;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="window" id="draggableWindow"></div>
+    <div class="snap-preview" id="snapPreview"></div>
+
+    <script>
+        const windowEl = document.getElementById('draggableWindow');
+        const snapPreview = document.getElementById('snapPreview');
+        const edgeDetection = 70;
+        let isDragging = false;
+        let offsetX, offsetY;
+        let cursorX, cursorY;
+
+        // Function to calculate and show snap preview
+        function showSnapPreview(windowEl) {
+            const rect = windowEl.getBoundingClientRect();
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            snapPreview.style.display = "block";
+            snapPreview.style.left = 0;
+            snapPreview.style.top = 0;
+            snapPreview.style.width = "50%";
+            snapPreview.style.height = "50%";
+
+            // Determine snap location
+            if (cursorY < edgeDetection && cursorX < edgeDetection) {
+                // Top-left corner
+            } else if (cursorY < edgeDetection && cursorX > screenWidth - edgeDetection) {
+                // Top-right corner
+                snapPreview.style.left = "50%";
+            } else if (cursorY > screenHeight - edgeDetection && cursorX < edgeDetection) {
+                // Bottom-left corner
+                snapPreview.style.top = "50%";
+            } else if (cursorY > screenHeight - edgeDetection && cursorX > screenWidth - edgeDetection) {
+                // Bottom-right corner
+                snapPreview.style.left = "50%";
+                snapPreview.style.top = "50%";
+            } else if (cursorY < edgeDetection) {
+                // Top half
+                snapPreview.style.width = "100%";
+            } else if (cursorX < edgeDetection) {
+                // Left half
+                snapPreview.style.height = "100%";
+            } else if (cursorX > screenWidth - edgeDetection) {
+                // Right half
+                snapPreview.style.left = "50%";
+                snapPreview.style.height = "100%";
+            } else if (cursorY > screenHeight - edgeDetection) {
+                // Bottom half
+                snapPreview.style.top = "50%";
+                snapPreview.style.width = "100%";
+            } else {
+                // Hide preview if not near edges
+                snapPreview.style.display = "none";
+            }
+        }
+
+        // Function to snap the window to predefined areas
+        function snapWindow(windowEl) {
+            const rect = windowEl.getBoundingClientRect();
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            windowEl.style.left = 0;
+            windowEl.style.top = 0;
+            windowEl.style.width = "50%";
+            windowEl.style.height = "50%";
+
+            // Snapping logic
+            if (cursorY < edgeDetection && cursorX < edgeDetection) {
+                // Top-left corner
+            } else if (cursorY < edgeDetection && cursorX > screenWidth - edgeDetection) {
+                // Top-right corner
+                windowEl.style.left = "50%";
+            } else if (cursorY > screenHeight - edgeDetection && cursorX < edgeDetection) {
+                // Bottom-left corner
+                windowEl.style.top = "50%";
+            } else if (cursorY > screenHeight - edgeDetection && cursorX > screenWidth - edgeDetection) {
+                // Bottom-right corner
+                windowEl.style.left = "50%";
+                windowEl.style.top = "50%";
+            } else if (cursorY < edgeDetection) {
+                // Top half
+                windowEl.style.width = "100%";
+            } else if (cursorX < edgeDetection) {
+                // Left half
+                windowEl.style.height = "100%";
+            } else if (cursorX > screenWidth - edgeDetection) {
+                // Right half
+                windowEl.style.left = "50%";
+                windowEl.style.height = "100%";
+            } else if (cursorY > screenHeight - edgeDetection) {
+                // Bottom half
+                windowEl.style.top = "50%";
+                windowEl.style.width = "100%";
+            } else {
+                // Reset to default size if not near edges
+                windowEl.style.left = `${cursorX - offsetX}px`;
+                windowEl.style.top = `${cursorY - offsetY}px`;
+                windowEl.style.width = "300px";
+                windowEl.style.height = "200px";
+            }
+        }
+
+        // Mouse events
+        windowEl.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - windowEl.getBoundingClientRect().left;
+            offsetY = e.clientY - windowEl.getBoundingClientRect().top;
+            snapPreview.style.display = "none";
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+
+            console.log(cursorX, cursorY);
+
+            if (isDragging) {
+                windowEl.style.left = `${e.clientX - offsetX}px`;
+                windowEl.style.top = `${e.clientY - offsetY}px`;
+                showSnapPreview(windowEl);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                snapPreview.style.display = "none";
+                snapWindow(windowEl);
+            }
+        });
+
+        showSnapPreview(windowEl); // Hide the snap
+    </script>
+</body>
+
+</html>
