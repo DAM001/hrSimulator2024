@@ -112,9 +112,10 @@ class Application {
         return this.window != null;
     }
     
-    sendNotification(title, description) {
-        const notification = new SystemNotification(this, title, description);
+    sendNotification(title, description, onClickAction = null) {
+        const notification = new SystemNotification(this, title, description, onClickAction);
         os.taskbar.addNotification(notification);
-        this. activeNotifications
+        this.activeNotifications;
     }
+    
 }

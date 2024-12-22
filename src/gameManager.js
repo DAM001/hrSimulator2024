@@ -62,7 +62,7 @@ class GameManager {
         }, settings.upgrades.emailRate || 5000); // Dynamically read from settings
 
         this.notificationTimer = setInterval(() => {
-            this.generateRandomNotification();
+            this.generateRandomTeamsMessage();
         }, settings.upgrades.notificationRate || 7000); // Dynamically read from settings
     }
 
@@ -84,23 +84,34 @@ class GameManager {
         outlook.addEmail(new Email({ from: sender, subject, content: message }));
     }
 
-    generateRandomNotification() {
-        const titles = ["System Alert", "Reminder", "Task Update"];
-        const descriptions = ["Check your inbox.", "Don't forget the deadline.", "A task has been assigned to you."];
-
-        const title = titles[Math.floor(Math.random() * titles.length)];
-        const description = descriptions[Math.floor(Math.random() * descriptions.length)];
-
-        const notification = new SystemNotification(null, title, description);
-        this.addNotification(notification);
-    }
+    generateRandomTeamsMessage() {
+        const users = Array.from(softMicroTeams.users.values());
+        if (users.length === 0) {
+            console.warn("No users available in Teams for random messages.");
+            return;
+        }
+    
+        const randomUser = users[Math.floor(Math.random() * users.length)];
+        const messages = [
+            "Hey, can you review the document?",
+            "Don't forget the meeting at 3 PM.",
+            "Here's the update on the project.",
+            "Let's sync up on the latest tasks.",
+            "Can you send me the report?"
+        ];
+    
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    
+        softMicroTeams.sendMessageToUser({
+            user: randomUser.name,
+            content: randomMessage,
+        });
+    }    
 
     addNotification(notification) {
         if (this.notifications.has(notification.id)) return;
 
         this.notifications.set(notification.id, notification);
-        console.log(`Notification added: ${notification.data.title}`);
-
         const taskbar = os.taskbar;
         taskbar.addNotification(notification);
     }
@@ -158,6 +169,7 @@ const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
 softMicroTeams.addUser(new TeamsUser("BOSS", "./assets/email.png"));
 softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
 
+/*
 // Example usage of the new function
 softMicroTeams.sendMessageToUser({ user: "BOSS", content: "Hello Boss, this is a test message!" });
 softMicroTeams.sendMessageToUser({ user: "CEO", content: "CEO, you've got a system notification!" });
@@ -167,5 +179,6 @@ outlook.addEmail(new Email({ from: "Boss", subject: "Finish the report ASAP!", c
 outlook.addEmail(new Email({ from: "HR", subject: "Meeting Reminder", content: "Meeting scheduled at 3 PM today." }));
 outlook.addEmail(new Email({ from: "Team Lead", subject: "Code Review", content: "Please review the latest merge request." }), "inbox");
 outlook.addEmail(new Email({ from: "Nigerian Prince", subject: "You Won $1M!", content: "Send us your bank details to claim." }), "spam");
+*/
 
 gameManager.startClock();

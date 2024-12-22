@@ -86,9 +86,22 @@ class Outlook extends Application {
             this.renderEmails();
         }
     
-        this.sendNotification(`New Email from ${email.from}`, email.subject);
-    }
+        const onClickAction = () => {
+            this.currentFolder = folder;
+            this.currentEmail = email;
+            this.renderEmailView();
     
+            // Ensure the Outlook application window is open
+            if (!this.isWindowOpen()) {
+                os.openApplication(this);
+            } else if (!this.isWindowVisible()) {
+                this.toggleWindow();
+            }
+        };
+    
+        this.sendNotification(`New Email from ${email.from}`, email.subject, onClickAction);
+    }
+        
 
     renderComposeView(type = "new") {
         const { from = "", cc = "", subject = "", content = "" } = this.currentEmail || {};

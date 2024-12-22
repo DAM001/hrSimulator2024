@@ -89,14 +89,27 @@ class Teams extends Application {
     // New Function: Send a message to a specific user and trigger a notification
     sendMessageToUser({ user, content }) {
         const targetUser = this.users.get(user);
-
+    
         if (targetUser) {
             const message = new TeamsMessage("System", content);
             targetUser.addMessage(message);
-
-            // Send notification
-            this.sendNotification(`New Message from ${targetUser.name}`, content);
-
+    
+            // Define the onClickAction for the notification
+            const onClickAction = () => {
+                this.selectUser(targetUser); // Select the user
+                this.loadMessages();        // Load the messages for the selected user
+    
+                // Ensure the Teams application window is open
+                if (!this.isWindowOpen()) {
+                    os.openApplication(this);
+                } else if (!this.isWindowVisible()) {
+                    this.toggleWindow();
+                }
+            };
+    
+            // Send the notification with the onClickAction
+            this.sendNotification(`New Message from ${targetUser.name}`, content, onClickAction);
+    
             // Reload messages if the target user is currently selected
             if (this.selectedUser === targetUser) {
                 this.loadMessages();
@@ -104,7 +117,7 @@ class Teams extends Application {
         } else {
             console.error(`User "${user}" not found.`);
         }
-    }
+    }    
 }
 
 class TeamsUser {

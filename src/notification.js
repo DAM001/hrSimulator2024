@@ -2,6 +2,7 @@ class SystemNotification {
     static notificationCounter = 0;
     id;
     application;
+    onClickAction; // New parameter for custom click action
     data = {
         title: "Notification",
         description: ""
@@ -9,14 +10,19 @@ class SystemNotification {
     statusBarElement;
     popupElement;
 
-    constructor(application, title, description) {
+    constructor(application, title, description, onClickAction = null) {
+        if (!application) {
+            console.error("SystemNotification requires a valid application instance.");
+            return;
+        }
         this.id = `${application.data.name}-${SystemNotification.notificationCounter++}-${this.generateUUID()}`;
         this.application = application;
         this.data.title = title;
         this.data.description = description;
-
+        this.onClickAction = onClickAction;
         os.taskbar.addNotification(this);
     }
+    
 
     generateUUID() {
         return 'xxxxxx'.replace(/[xy]/g, (c) => {
@@ -56,11 +62,14 @@ class SystemNotification {
         });
 
         notificationHTML.addEventListener("click", () => {
-            if (!this.application.isWindowOpen()) {
-                os.openApplication(this.application);
-            }
-            else if (!this.application.isWindowVisible()) {
-                this.application.toggleWindow();
+            if (this.onClickAction) {
+                this.onClickAction(); // Execute the custom action
+            } else {
+                if (!this.application.isWindowOpen()) {
+                    os.openApplication(this.application);
+                } else if (!this.application.isWindowVisible()) {
+                    this.application.toggleWindow();
+                }
             }
 
             os.taskbar.deleteNotification(this);
@@ -70,7 +79,7 @@ class SystemNotification {
     }
 
     deleteNotification() {
-        this.statusBarElement.remove();
-        if (this.popupElement != null) this.popupElement.remove();
+        this.statusBarElement?.remove();
+        this.popupElement?.remove();
     }
 }
