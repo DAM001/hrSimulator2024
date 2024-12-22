@@ -9,6 +9,11 @@ class Application {
     isOpen;
     activeNotifications;
     isAnimating = false;
+    isDragging = false;
+    cursorX = 0;
+    cursorY = 0;
+    defaultWidth = 500;
+    defaultHeight = 400;
 
     constructor(name, icon) {
         this.isOpen = false;
@@ -65,6 +70,12 @@ class Application {
 
         this.content = windowHTML.querySelector(".window-content");
         this.window = windowHTML;
+
+        this.window.style.width = this.defaultWidth + "px";
+        this.window.style.height = this.defaultHeight + "px";
+
+        this.moveWindow();
+
         return windowHTML;
     }
 
@@ -85,13 +96,11 @@ class Application {
         if (this.isAnimating) return;
     
         this.isAnimating = true;
-        this.window.style.width = "0";
 
         if (isHidden) {
             this.window.style.removeProperty("display");
             setTimeout(() => {
                 this.isAnimating = false;
-                this.window.style.width = "100%";
             }, 0);
         } else {
             setTimeout(() => {
@@ -117,5 +126,86 @@ class Application {
         os.taskbar.addNotification(notification);
         this.activeNotifications;
     }
-    
+
+    moveWindow() {
+        const titleBar = this.window.querySelector('.title-bar');
+        titleBar.addEventListener('mousedown', (e) => {
+            this.isDragging = true;
+
+            const rect = this.window.getBoundingClientRect();
+            const relativeX = (e.clientX - rect.left) / rect.width;
+            const relativeY = (e.clientY - rect.top) / rect.height;
+
+            // Reset size
+            this.window.style.width = this.defaultWidth + "px";
+            this.window.style.height = this.defaultHeight + "px";
+
+            // Adjust position to keep cursor's relative position
+            const newLeft = e.clientX - this.defaultWidth * relativeX;
+            const newTop = e.clientY - this.defaultHeight * relativeY;
+
+            this.window.style.left = `${newLeft}px`;
+            this.window.style.top = `${newTop}px`;
+
+            this.window.style.setProperty('--left-pos', e.clientX - newLeft);
+            this.window.style.setProperty('--top-pos', e.clientY - newTop);
+
+            os.snapPreview.style.display = "none";
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            this.cursorX = e.clientX;
+            this.cursorY = e.clientY;
+
+            if (this.isDragging) {
+                this.window.style.left = `${e.clientX - this.window.style.getPropertyValue('--left-pos')}px`;
+                this.window.style.top = `${e.clientY - this.window.style.getPropertyValue('--top-pos')}px`;
+                os.showSnapPreview(this.cursorX, this.cursorY);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (this.isDragging) {
+                this.isDragging = false;
+                os.snapPreview.style.display = "none";
+                this.snapWindow();
+            }
+        });
+    }
+
+    snapWindow() {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        this.window.style.left = 0;
+        this.window.style.top = 0;
+        this.window.style.width = "50%";
+        this.window.style.height = "50%";
+
+        if (this.cursorY < os.edgeDetection && this.cursorX < os.edgeDetection) {
+            // Top-left corner
+        } else if (this.cursorY < os.edgeDetection && this.cursorX > screenWidth - os.edgeDetection) {
+            this.window.style.left = "50%"; // Top-right corner
+        } else if (this.cursorY > screenHeight - os.edgeDetection && this.cursorX < os.edgeDetection) {
+            this.window.style.top = "50%"; // Bottom-left corner
+        } else if (this.cursorY > screenHeight - os.edgeDetection && this.cursorX > screenWidth - os.edgeDetection) {
+            this.window.style.left = "50%";
+            this.window.style.top = "50%"; // Bottom-right corner
+        } else if (this.cursorY < os.edgeDetection) {
+            this.window.style.width = "100%"; // Top half
+        } else if (this.cursorX < os.edgeDetection) {
+            this.window.style.height = "100%"; // Left half
+        } else if (this.cursorX > screenWidth - os.edgeDetection) {
+            this.window.style.left = "50%";
+            this.window.style.height = "100%"; // Right half
+        } else if (this.cursorY > screenHeight - os.edgeDetection) {
+            this.window.style.top = "50%";
+            this.window.style.width = "100%"; // Bottom half
+        } else {
+            this.window.style.left = `${this.cursorX - this.window.style.getPropertyValue('--left-pos')}px`;
+            this.window.style.top = `${this.cursorY - this.window.style.getPropertyValue('--top-pos')}px`;
+            this.window.style.width = this.defaultWidth + "px";
+            this.window.style.height = this.defaultHeight + "px"; // Default size
+        }
+    }
 }
