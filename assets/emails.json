@@ -1,0 +1,232 @@
+[
+    {
+      "from": "Boss",
+      "subject": "Overtime Approval Needed",
+      "content": "We need extra hours this week to finish the project. Please confirm your availability for overtime this weekend.",
+      "deadline": "Friday 6 PM",
+      "quickResponses": [
+        { "text": "Only if I can work from my bed in pajamas.", "correct": false },
+        { "text": "Sure, I’ll be there and ready to work.", "correct": true },
+        { "text": "Weekends are for Netflix and pizza, not work.", "correct": false },
+        { "text": "Does overtime come with gold-plated coffee mugs?", "correct": false }
+      ]
+    },
+    {
+      "from": "HR",
+      "subject": "Annual Survey Reminder",
+      "content": "Please complete the mandatory employee satisfaction survey. Your feedback helps us improve.",
+      "deadline": "Next Monday",
+      "quickResponses": [
+        { "text": "I’ll just copy-paste random answers. Done!", "correct": false },
+        { "text": "I’ll fill it out thoughtfully. Thanks for the reminder.", "correct": true },
+        { "text": "Improvement? Just give everyone a raise.", "correct": false },
+        { "text": "Why bother? Nothing ever changes anyway.", "correct": false }
+      ]
+    },
+    {
+      "from": "Marketing",
+      "subject": "Launch Party Ideas",
+      "content": "We’re planning a product launch party next month. Share your creative ideas for the event.",
+      "deadline": "End of the week",
+      "quickResponses": [
+        { "text": "Let’s just order pizza and call it a day.", "correct": false },
+        { "text": "How about a themed party to match the product’s vibe?", "correct": true },
+        { "text": "Can we just not have a party? Too much effort.", "correct": false },
+        { "text": "One word: clown costumes. Everyone loves clowns.", "correct": false }
+      ]
+    },
+    {
+      "from": "IT Support",
+      "subject": "Password Policy Update",
+      "content": "We’ve updated our password policy. All employees must change their passwords by the end of the day. Use a secure combination of letters, numbers, and symbols.",
+      "deadline": "Today 5 PM",
+      "quickResponses": [
+        { "text": "12345 is secure enough for me.", "correct": false },
+        { "text": "Got it. I’ll update my password now.", "correct": true },
+        { "text": "Can I just use ‘password’? No one will guess it.", "correct": false },
+        { "text": "I’ll change it to ‘Ihatepasswords123!’ – secure, right?", "correct": false }
+      ]
+    },
+    {
+      "from": "CEO",
+      "subject": "Vision Statement Feedback",
+      "content": "Please review our updated company vision statement and share your feedback. It’s critical that it resonates with the entire team.",
+      "deadline": "Thursday EOD",
+      "quickResponses": [
+        { "text": "Let’s just copy Apple’s vision statement and tweak it.", "correct": false },
+        { "text": "I’ll read it carefully and provide my thoughts.", "correct": true },
+        { "text": "Vision statements are overrated. Let’s skip this.", "correct": false },
+        { "text": "How about we make the vision ‘Rule the world’?", "correct": false }
+      ]
+    },
+    {
+      "from": "Legal",
+      "subject": "Contract Review Request",
+      "content": "We need your review on the vendor contract. Ensure all terms are agreeable before signing.",
+      "deadline": "Tomorrow 3 PM",
+      "quickResponses": [
+        { "text": "I’ll sign without reading. What’s the worst that could happen?", "correct": false },
+        { "text": "I’ll review it and flag any issues.", "correct": true },
+        { "text": "Contracts are boring. Can’t someone else do it?", "correct": false },
+        { "text": "Let’s just trust them and move on.", "correct": false }
+      ]
+    },
+    {
+      "from": "Finance",
+      "subject": "Reimbursement Delay Apology",
+      "content": "We’re experiencing delays in processing reimbursements. Apologies for the inconvenience, and thank you for your patience.",
+      "deadline": "N/A",
+      "quickResponses": [
+        { "text": "Can you reimburse me with Monopoly money in the meantime?", "correct": false },
+        { "text": "Thanks for the update. I’ll wait.", "correct": true },
+        { "text": "I’ll just expense everything twice to make up for it.", "correct": false },
+        { "text": "I knew this company was going broke!", "correct": false }
+      ]
+    },
+    {
+      "from": "Project Manager",
+      "subject": "Sprint Retrospective",
+      "content": "Join the sprint retrospective meeting tomorrow to discuss what went well and areas for improvement.",
+      "deadline": "Tomorrow 11 AM",
+      "quickResponses": [
+        { "text": "I’ll attend and share my thoughts.", "correct": true },
+        { "text": "Do we have to? Can’t we just skip the meeting?", "correct": false },
+        { "text": "Let’s just blame everything on the interns.", "correct": false },
+        { "text": "What’s the point? It’s all downhill from here.", "correct": false }
+      ]
+    },
+    {
+      "from": "Facilities",
+      "subject": "Office Renovation Feedback",
+      "content": "We’re planning to renovate the office. Share your thoughts on what changes you’d like to see.",
+      "deadline": "Friday",
+      "quickResponses": [
+        { "text": "Turn the office into a giant ball pit.", "correct": false },
+        { "text": "I’ll provide some practical suggestions.", "correct": true },
+        { "text": "Who cares? I work from home anyway.", "correct": false },
+        { "text": "Can we just get free snacks? That’s all I need.", "correct": false }
+      ]
+    },
+    {
+      "from": "Team Lead",
+      "subject": "Bug Fix Priority",
+      "content": "Please prioritize fixing the critical bugs reported in the latest release. The list is in the task tracker.",
+      "deadline": "ASAP",
+      "quickResponses": [
+        { "text": "I’ll fix them after I finish my nap.", "correct": false },
+        { "text": "I’m on it. I’ll get them resolved soon.", "correct": true },
+        { "text": "Can’t we just pretend they don’t exist?", "correct": false },
+        { "text": "Bugs? What bugs? I see features.", "correct": false }
+      ]
+    },
+    {
+      "from": "Customer Support",
+      "subject": "Critical Customer Complaint",
+      "content": "A customer has reported a major issue with our service. Please investigate and resolve it immediately.",
+      "deadline": "ASAP",
+      "quickResponses": [
+        { "text": "Customers are always complaining. Ignore it.", "correct": false },
+        { "text": "I’ll look into it and fix the problem.", "correct": true },
+        { "text": "Let’s send them a generic apology and move on.", "correct": false },
+        { "text": "Can we just give them a coupon and call it a day?", "correct": false }
+      ]
+    },
+    {
+        "from": "Operations Manager",
+        "subject": "Emergency Office Relocation",
+        "content": "Dear Team,\n\nWe’ve had an unexpected situation at the office due to a burst water pipe. As a result, we need to relocate to the temporary coworking space downtown for the next two weeks. Please confirm your understanding and readiness to work from this new location. Also, let me know if you encounter any specific challenges or have preferences for desk assignments.\n\nThank you for your cooperation during this transition.\n\nBest,\nOperations Team",
+        "deadline": "End of Day",
+        "quickResponses": [
+          { "text": "I’ll bring my inflatable pool to stay in the spirit of things.", "correct": false },
+          { "text": "Understood. I’ll be ready to work from the new location.", "correct": true },
+          { "text": "Can’t we just work from the parking lot instead?", "correct": false },
+          { "text": "I’ll only go if there’s a coffee machine better than ours.", "correct": false }
+        ]
+      },
+      {
+        "from": "Product Development Team",
+        "subject": "Prototype Feedback Needed",
+        "content": "Hi Team,\n\nWe’ve completed the initial prototype for the new mobile app. It’s ready for your review and testing. Please test the app for usability, design, and any potential bugs. Detailed feedback is crucial for the next iteration.\n\nKey questions to address:\n- Does the app’s navigation feel intuitive?\n- Are there any issues with responsiveness on different devices?\n- Do you have any suggestions for improving the user interface?\n\nPlease provide your feedback by replying to this email or uploading your comments to the shared folder by Thursday EOD.\n\nThanks in advance for your input.\n\nRegards,\nProduct Team",
+        "deadline": "Thursday EOD",
+        "quickResponses": [
+          { "text": "The prototype looks amazing! No need for changes at all.", "correct": false },
+          { "text": "I’ll thoroughly review it and provide my feedback soon.", "correct": true },
+          { "text": "Is ‘better colors’ a valid feedback? That’s all I have.", "correct": false },
+          { "text": "I’ll test it on my 2006 flip phone and let you know.", "correct": false }
+        ]
+      },
+      {
+        "from": "Finance Department",
+        "subject": "Budget Cut Announcement",
+        "content": "Dear Team,\n\nDue to unforeseen financial constraints, we are implementing a temporary budget reduction across all departments. This will involve reduced travel allowances, a freeze on new equipment purchases, and a suspension of non-essential subscriptions.\n\nWe understand this may cause some inconveniences, and we encourage you to reach out if you have concerns or urgent needs that cannot wait until the next review period. We appreciate your understanding and commitment to navigating this challenging time together.\n\nPlease acknowledge this email and let us know if you have any immediate questions or concerns.\n\nRegards,\nFinance Team",
+        "deadline": "Friday Noon",
+        "quickResponses": [
+          { "text": "Can I still expense my daily croissant? Asking for a friend.", "correct": false },
+          { "text": "Understood. Let me know if there’s anything I can do to help.", "correct": true },
+          { "text": "Does this mean we’re skipping the holiday party too?", "correct": false },
+          { "text": "Sounds like a great time to finally quit!", "correct": false }
+        ]
+      },
+      {
+        "from": "HR Department",
+        "subject": "Mandatory Health & Safety Training",
+        "content": "Dear All,\n\nAs part of our commitment to ensuring a safe and compliant workplace, all employees are required to complete a mandatory Health & Safety Training session. The training will cover topics such as fire safety, ergonomic practices, and emergency procedures.\n\nPlease select one of the following sessions to attend:\n1. Wednesday, 9:00 AM - 12:00 PM\n2. Thursday, 1:00 PM - 4:00 PM\n\nFailure to attend will result in non-compliance reporting. Kindly RSVP by the end of the day to secure your preferred slot.\n\nBest regards,\nHR Team",
+        "deadline": "End of Day",
+        "quickResponses": [
+          { "text": "Can I bring popcorn? Sounds like a thrilling session.", "correct": false },
+          { "text": "I’ll confirm my attendance by the deadline. Thank you!", "correct": true },
+          { "text": "Can’t we just watch a YouTube video and call it a day?", "correct": false },
+          { "text": "Only if we get free coffee during the session.", "correct": false }
+        ]
+      },
+      {
+        "from": "IT Support",
+        "subject": "Urgent: Password Reset Required",
+        "content": "Dear Employee,\n\nWe’ve detected unusual activity on your account, and as a precaution, your password has been reset. To regain access, please follow these steps:\n1. Visit the company portal and select 'Forgot Password.'\n2. Answer your security questions.\n3. Set a new password that meets our security guidelines (minimum 12 characters, including symbols and numbers).\n\nPlease complete this process within 24 hours to avoid account suspension. If you encounter any issues, contact IT Support immediately.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nIT Support",
+        "deadline": "24 Hours",
+        "quickResponses": [
+          { "text": "Can I just write my password on a sticky note again?", "correct": false },
+          { "text": "Understood. I’ll reset my password promptly.", "correct": true },
+          { "text": "I’ll reset it to 'password123'—that’s secure, right?", "correct": false },
+          { "text": "I don’t need to; no one would hack me. I’m boring.", "correct": false }
+        ]
+      },
+      {
+        "from": "Marketing Team",
+        "subject": "Input Needed: New Brand Logo",
+        "content": "Hello Team,\n\nWe’re in the process of redesigning our brand logo and would like your feedback. Attached are three potential designs (A, B, and C). Please review them and let us know:\n1. Which design you prefer and why.\n2. Any suggestions for improvement.\n\nYour input will be invaluable in ensuring our new branding resonates with both employees and clients. Please reply by the end of the week.\n\nThank you for your creativity and insights!\n\nBest,\nThe Marketing Team",
+        "deadline": "End of the Week",
+        "quickResponses": [
+          { "text": "Can we just use Comic Sans for everything? It’s timeless.", "correct": false },
+          { "text": "I’ll review the designs and provide my feedback soon.", "correct": true },
+          { "text": "None of these work. Just go with a random meme instead.", "correct": false },
+          { "text": "I’ll only vote if I get royalties for the final design.", "correct": false }
+        ]
+      },
+      {
+        "from": "Team Lead",
+        "subject": "Weekly Performance Report Request",
+        "content": "Hi Team,\n\nAs part of our ongoing efforts to streamline processes, I need everyone to submit their weekly performance reports by Friday at 3:00 PM. These reports should include:\n- Completed tasks and their outcomes.\n- Challenges encountered and how they were addressed.\n- Goals for the upcoming week.\n\nPlease ensure your submissions are concise yet comprehensive. If you need assistance or clarification, don’t hesitate to reach out.\n\nThanks for your hard work and dedication.\n\nBest regards,\n[Team Lead]",
+        "deadline": "Friday, 3:00 PM",
+        "quickResponses": [
+          { "text": "Can I just copy-paste from last week? No one will notice.", "correct": false },
+          { "text": "Understood. I’ll submit my report on time.", "correct": true },
+          { "text": "Do you mind if I hand it in next week instead?", "correct": false },
+          { "text": "Can I just list ‘survived the week’ as my only outcome?", "correct": false }
+        ]
+      },
+      {
+        "from": "Facilities Management",
+        "subject": "Air Conditioning Maintenance",
+        "content": "Dear Employees,\n\nPlease be informed that the office air conditioning system will undergo maintenance this Friday from 8:00 AM to 4:00 PM. During this time, the system will be turned off, and the indoor temperature may be higher than usual.\n\nWe recommend wearing lighter clothing and staying hydrated. Portable fans will be available upon request.\n\nThank you for your understanding as we work to ensure a comfortable environment for everyone.\n\nBest regards,\nFacilities Management",
+        "deadline": "Friday",
+        "quickResponses": [
+          { "text": "Can I bring a kiddie pool and some ice cubes to work?", "correct": false },
+          { "text": "Understood. I’ll plan accordingly. Thank you.", "correct": true },
+          { "text": "Will we also get free sunscreen for indoor use?", "correct": false },
+          { "text": "If it gets too hot, I’m relocating to the freezer section.", "correct": false }
+        ]
+      }      
+
+  ]
+  

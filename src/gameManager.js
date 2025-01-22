@@ -67,22 +67,42 @@ class GameManager {
     }
 
     generateRandomEmail() {
-        const senders = ["Boss", "HR", "Team Lead", "Finance", "Support"];
-        const subjects = ["Urgent Task", "Meeting Reminder", "Review Request", "Budget Update", "Policy Changes"];
-        const messages = [
-            "Please complete this task ASAP.",
-            "Don't forget about the meeting at 3 PM.",
-            "Review the latest code changes.",
-            "Here's the latest budget update.",
-            "Important changes in company policy."
-        ];
-
-        const sender = senders[Math.floor(Math.random() * senders.length)];
-        const subject = subjects[Math.floor(Math.random() * subjects.length)];
-        const message = messages[Math.floor(Math.random() * messages.length)];
-
-        outlook.addEmail(new Email({ from: sender, subject, content: message }));
-    }
+        // Utility to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+    
+        fetch('../assets/emails.json') // Fetch the emails.json file
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch emails.json: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((emails) => {
+                const randomEmail = emails[Math.floor(Math.random() * emails.length)];
+                const { from, subject, content, deadline, quickResponses } = randomEmail;
+    
+                // Shuffle the quick responses
+                const shuffledResponses = shuffleArray([...quickResponses]);
+    
+                // Create and add the email
+                outlook.addEmail(
+                    new Email({
+                        from,
+                        subject,
+                        content,
+                        deadline,
+                        quickResponses: shuffledResponses,
+                    })
+                );
+            })
+            .catch((error) => console.error("Error loading emails:", error));
+    }            
 
     generateRandomTeamsMessage() {
         const users = Array.from(softMicroTeams.users.values());
