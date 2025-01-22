@@ -1,6 +1,8 @@
 :root {
     --background-color: #1E1E2D;
     --font-color: #e7e7e7;
+    /* OS */
+    --taskbar-size: 50px;
     /* THEME */
     --theme-color: #006421;
     --theme-border-color: #498f5a;

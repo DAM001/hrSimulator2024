@@ -1,7 +1,7 @@
 .taskbar {
-    --taskbar-size: 39px;
     --taskbar-padding: 5px;
-    height: var(--taskbar-size);
+    --actual-taskbar-size: calc(var(--taskbar-size) - var(--taskbar-padding) * 2 - 1px);
+    height: var(--actual-taskbar-size);
     padding: var(--taskbar-padding);
     display: flex;
 
@@ -11,8 +11,8 @@
     button {
         margin: 0;
         padding: 0;
-        width: var(--taskbar-size);
-        height: var(--taskbar-size);
+        width: var(--actual-taskbar-size);
+        height: var(--actual-taskbar-size);
 
         border: none;
         border-radius: 5px;
@@ -20,8 +20,8 @@
         transition: background-color .3s;
 
         &:has(img) img {
-            width: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
-            height: calc(var(--taskbar-size) - var(--taskbar-padding) * 2);
+            width: calc(var(--actual-taskbar-size) - var(--taskbar-padding) * 2);
+            height: calc(var(--actual-taskbar-size) - var(--taskbar-padding) * 2);
             padding: var(--taskbar-padding);
         }
 
@@ -35,8 +35,8 @@
         cursor: pointer;
 
         img {
-            width: calc(var(--taskbar-size) - var(--taskbar-padding));
-            height: calc(var(--taskbar-size) - var(--taskbar-padding));
+            width: calc(var(--actual-taskbar-size) - var(--taskbar-padding));
+            height: calc(var(--actual-taskbar-size) - var(--taskbar-padding));
             padding: calc(var(--taskbar-padding) / 2);
         }
     }
@@ -62,7 +62,7 @@
     .taskbar-menu {
         --margin: 10px;
         position: fixed;
-        bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
+        bottom: calc(var(--actual-taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
         left: var(--margin);
         padding: 10px;
 
@@ -96,7 +96,7 @@
     .status-bar-menu {
         --margin: 10px;
         position: fixed;
-        bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
+        bottom: calc(var(--actual-taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
         right: var(--margin);
         padding: 10px 5px 10px;
 
@@ -136,7 +136,7 @@
     .popup-notifications-folder {
         --margin: 10px;
         position: fixed;
-        bottom: calc(var(--taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
+        bottom: calc(var(--actual-taskbar-size) + var(--taskbar-padding) * 2 + var(--margin));
         right: var(--margin);
 
         display: flex;

@@ -62,26 +62,26 @@ class OperatingSystem {
         this.snapPreview.style.left = 0;
         this.snapPreview.style.top = 0;
         this.snapPreview.style.width = "50%";
-        this.snapPreview.style.height = "50%";
+        this.snapPreview.style.height = "calc(50% - (var(--taskbar-size) / 2) - 1px)";
 
         if (cursorY < this.edgeDetection && cursorX < this.edgeDetection) {
             // Top-left corner
         } else if (cursorY < this.edgeDetection && cursorX > screenWidth - this.edgeDetection) {
             this.snapPreview.style.left = "50%"; // Top-right corner
         } else if (cursorY > screenHeight - this.edgeDetection && cursorX < this.edgeDetection) {
-            this.snapPreview.style.top = "50%"; // Bottom-left corner
+            this.snapPreview.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-left corner
         } else if (cursorY > screenHeight - this.edgeDetection && cursorX > screenWidth - this.edgeDetection) {
             this.snapPreview.style.left = "50%";
-            this.snapPreview.style.top = "50%"; // Bottom-right corner
+            this.snapPreview.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-right corner
         } else if (cursorY < this.edgeDetection) {
             this.snapPreview.style.width = "100%"; // Top half
         } else if (cursorX < this.edgeDetection) {
-            this.snapPreview.style.height = "100%"; // Left half
+            this.snapPreview.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Left half
         } else if (cursorX > screenWidth - this.edgeDetection) {
             this.snapPreview.style.left = "50%";
-            this.snapPreview.style.height = "100%"; // Right half
+            this.snapPreview.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Right half
         } else if (cursorY > screenHeight - this.edgeDetection) {
-            this.snapPreview.style.top = "50%";
+            this.snapPreview.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)";
             this.snapPreview.style.width = "100%"; // Bottom half
         } else {
             this.snapPreview.style.display = "none"; // Hide if not near edges

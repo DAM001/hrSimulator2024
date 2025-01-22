@@ -180,26 +180,26 @@ class Application {
         this.window.style.left = 0;
         this.window.style.top = 0;
         this.window.style.width = "50%";
-        this.window.style.height = "50%";
+        this.window.style.height = "calc(50% - (var(--taskbar-size) / 2) - 1px)";
 
         if (this.cursorY < os.edgeDetection && this.cursorX < os.edgeDetection) {
             // Top-left corner
         } else if (this.cursorY < os.edgeDetection && this.cursorX > screenWidth - os.edgeDetection) {
             this.window.style.left = "50%"; // Top-right corner
         } else if (this.cursorY > screenHeight - os.edgeDetection && this.cursorX < os.edgeDetection) {
-            this.window.style.top = "50%"; // Bottom-left corner
+            this.window.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-left corner
         } else if (this.cursorY > screenHeight - os.edgeDetection && this.cursorX > screenWidth - os.edgeDetection) {
             this.window.style.left = "50%";
-            this.window.style.top = "50%"; // Bottom-right corner
+            this.window.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-right corner
         } else if (this.cursorY < os.edgeDetection) {
             this.window.style.width = "100%"; // Top half
         } else if (this.cursorX < os.edgeDetection) {
-            this.window.style.height = "100%"; // Left half
+            this.window.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Left half
         } else if (this.cursorX > screenWidth - os.edgeDetection) {
             this.window.style.left = "50%";
-            this.window.style.height = "100%"; // Right half
+            this.window.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Right half
         } else if (this.cursorY > screenHeight - os.edgeDetection) {
-            this.window.style.top = "50%";
+            this.window.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)";
             this.window.style.width = "100%"; // Bottom half
         } else {
             this.window.style.left = `${this.cursorX - this.window.style.getPropertyValue('--left-pos')}px`;
