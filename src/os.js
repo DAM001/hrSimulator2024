@@ -3,13 +3,16 @@ class OperatingSystem {
     taskbar;
     applications;
     settings;
+    users;
 
     constructor() {
         this.container = document.querySelector(".viewport");
         this.taskbar = new Taskbar();
         this.applications = new Map();
         this.settings = new Settings();
+        this.users = new Map();
 
+        this.setupUsers();
         this.setupSnapPreview();
     }
 
@@ -87,5 +90,10 @@ class OperatingSystem {
         } else {
             this.snapPreview.style.display = "none"; // Hide if not near edges
         }
+    }
+
+    setupUsers() {
+        this.users.set("BOSS", new SystemUser("Áron", "Fernbach", "defaultUser", "aron.fernbach@company.com", "01/01/1990", "Team Lead"));
+        this.users.set("CEO", new SystemUser("John", "Doe", "defaultUser", "john.doe@company.com", "01/01/1970", "CEO"));
     }
 }

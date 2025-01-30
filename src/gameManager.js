@@ -105,13 +105,9 @@ class GameManager {
     }            
 
     generateRandomTeamsMessage() {
-        const users = Array.from(softMicroTeams.users.values());
-        if (users.length === 0) {
-            console.warn("No users available in Teams for random messages.");
-            return;
-        }
-    
-        const randomUser = users[Math.floor(Math.random() * users.length)];
+        // get a random member from os.users map
+        const usersArray = Array.from(os.users.values());
+        const randomUser = usersArray[Math.floor(Math.random() * usersArray.length)];
         const messages = [
             "Hey, can you review the document?",
             "Don't forget the meeting at 3 PM.",
@@ -121,11 +117,7 @@ class GameManager {
         ];
     
         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    
-        softMicroTeams.sendMessageToUser({
-            user: randomUser.name,
-            content: randomMessage,
-        });
+        softMicroTeams.sendMessageToUser(randomUser, randomMessage);
     }    
 
     addNotification(notification) {
@@ -183,22 +175,5 @@ const os = new OperatingSystem();
 //Apps
 const outlook = new Outlook("Outlook", "./assets/email.png");
 const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
-
-//Test Data
-//Teams Notifications
-softMicroTeams.addUser(new TeamsUser("BOSS", "./assets/email.png"));
-softMicroTeams.addUser(new TeamsUser("CEO", "./assets/email.png"));
-
-/*
-// Example usage of the new function
-softMicroTeams.sendMessageToUser({ user: "BOSS", content: "Hello Boss, this is a test message!" });
-softMicroTeams.sendMessageToUser({ user: "CEO", content: "CEO, you've got a system notification!" });
-
-// Add example emails
-outlook.addEmail(new Email({ from: "Boss", subject: "Finish the report ASAP!", content: "Please send it before EOD!" }));
-outlook.addEmail(new Email({ from: "HR", subject: "Meeting Reminder", content: "Meeting scheduled at 3 PM today." }));
-outlook.addEmail(new Email({ from: "Team Lead", subject: "Code Review", content: "Please review the latest merge request." }), "inbox");
-outlook.addEmail(new Email({ from: "Nigerian Prince", subject: "You Won $1M!", content: "Send us your bank details to claim." }), "spam");
-*/
 
 gameManager.startClock();

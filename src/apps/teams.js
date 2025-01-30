@@ -32,18 +32,14 @@ class Teams extends Application {
 
         // Render users in the sidebar
         const sidebar = this.content.querySelector(".sidebar");
-        this.users.forEach(user => {
-            const userProfile = user.renderProfile("profile");
+        os.users.forEach(user => {
+            const userProfile = this.renderProfile("profile", user);
             userProfile.addEventListener("click", () => this.selectUser(user, userProfile));
             sidebar.appendChild(userProfile);
         });
 
         // Send message button
         this.content.querySelector("#sendBtn").addEventListener("click", () => this.sendMessage());
-    }
-
-    addUser(user) {
-        this.users.set(user.name, user);
     }
 
     selectUser(user, element) {
@@ -62,15 +58,15 @@ class Teams extends Application {
         messagesContainer.innerHTML = ""; // Clear previous messages
 
         if (this.selectedUser) {
-            this.selectedUser.messages.forEach((content, id) => {
+            for (const [key, value] of this.selectedUser.teamsMessages.entries()) {
                 const messageDiv = document.createElement("div");
                 messageDiv.classList.add("message");
                 messageDiv.innerHTML = `
-                    ${content.content} 
-                    <span>${this.selectedUser.name} ${new Date(content.time).toLocaleTimeString()}</span>
+                    ${value} 
+                    <span>${this.selectedUser.getName()} ${new Date(parseInt(key)).toLocaleTimeString()}</span>
                 `;
                 messagesContainer.appendChild(messageDiv);
-            });
+            }
         }
     }
 
@@ -79,24 +75,20 @@ class Teams extends Application {
         const messageContent = input.value.trim();
 
         if (messageContent && this.selectedUser) {
-            const message = new TeamsMessage("You", messageContent);
-            this.selectedUser.addMessage(message);
+            this.selectedUser.teamsMessages.set(`${Date.now()}`, messageContent);
             this.loadMessages(); // Reload messages after adding new one
             input.value = ""; // Clear input
         }
     }
 
     // New Function: Send a message to a specific user and trigger a notification
-    sendMessageToUser({ user, content }) {
-        const targetUser = this.users.get(user);
-    
-        if (targetUser) {
-            const message = new TeamsMessage("System", content);
-            targetUser.addMessage(message);
+    sendMessageToUser(user, content) {    
+        if (user) {
+            user.teamsMessages.set(`${Date.now()}`, content);
     
             // Define the onClickAction for the notification
             const onClickAction = () => {
-                this.selectUser(targetUser); // Select the user
+                this.selectUser(user); // Select the user
                 this.loadMessages();        // Load the messages for the selected user
     
                 // Ensure the Teams application window is open
@@ -108,56 +100,24 @@ class Teams extends Application {
             };
     
             // Send the notification with the onClickAction
-            this.sendNotification(`New Message from ${targetUser.name}`, content, onClickAction);
+            this.sendNotification(`New Message from ${user.getName()}`, content, onClickAction);
     
             // Reload messages if the target user is currently selected
-            if (this.selectedUser === targetUser) {
+            if (this.selectedUser === user) {
                 this.loadMessages();
             }
         } else {
             console.error(`User "${user}" not found.`);
         }
     }    
-}
-
-class TeamsUser {
-    name;
-    pic;
-    messages;
-
-    constructor(name, pic) {
-        this.name = name;
-        this.pic = pic;
-        this.messages = new Map();
-    }
-
-    addMessage(message) {
-        this.messages.set(message.id, message.data);
-    }
-
-    renderProfile(parentClass) {
+    
+    renderProfile(parentClass, user) {
         const profileHTML = document.createElement("div");
         profileHTML.classList.add(parentClass);
         profileHTML.innerHTML = `
-            <img src="${this.pic}" alt="${this.name}">
-            ${this.name}
+            <img src="${user.getPicture()}" alt="${user.getName()}">
+            ${user.getName()}
         `;
         return profileHTML;
-    }
-}
-
-class TeamsMessage {
-    id;
-    sender;
-    data = {
-        content: "",
-        time: 0
-    };
-
-    constructor(sender, content) {
-        this.id = `${Date.now()}`;
-        this.sender = sender;
-        this.data.content = content;
-        this.data.time = Date.now();
     }
 }
