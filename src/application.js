@@ -43,6 +43,7 @@ class Application {
                 </div>
                 <div class="buttons">
                     <div class="button minimize-button">&ndash;</div>
+                    <div class="button fullscreen-button">□</div>
                     <div class="button close-button">X</div>
                 </div>
             </div>
@@ -53,6 +54,10 @@ class Application {
 
         windowHTML.querySelector(".minimize-button").addEventListener("click", () => {
             this.toggleWindow();
+        });
+
+        windowHTML.querySelector(".fullscreen-button").addEventListener("click", () => {
+            this.maximizeWindow();
         });
 
         windowHTML.querySelector(".close-button").addEventListener("click", () => {
@@ -71,6 +76,8 @@ class Application {
         this.content = windowHTML.querySelector(".window-content");
         this.window = windowHTML;
 
+        this.window.style.top = "calc(50% - " + this.defaultHeight / 2 + "px)";
+        this.window.style.left = "calc(50% - " + this.defaultHeight / 2 + "px)";
         this.window.style.width = this.defaultWidth + "px";
         this.window.style.height = this.defaultHeight + "px";
 
@@ -111,6 +118,13 @@ class Application {
 
         this.window.classList.toggle("hidden");
     }
+
+    maximizeWindow() {
+        this.window.style.left = 0;
+        this.window.style.top = 0;
+        this.window.style.width = "100%";
+        this.window.style.height = "calc(100% - var(--taskbar-size) - 1px)";
+    }
     
     
     isWindowVisible() {
@@ -130,6 +144,9 @@ class Application {
     moveWindow() {
         const titleBar = this.window.querySelector('.title-bar');
         titleBar.addEventListener('mousedown', (e) => {
+            // Prevent dragging if clicking on a button
+            if (e.target.closest('.buttons')) return;
+
             this.isDragging = true;
 
             const rect = this.window.getBoundingClientRect();
@@ -193,6 +210,7 @@ class Application {
             this.window.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-right corner
         } else if (this.cursorY < os.edgeDetection) {
             this.window.style.width = "100%"; // Top half
+            this.window.style.height = "calc(100% - var(--taskbar-size) - 1px)";
         } else if (this.cursorX < os.edgeDetection) {
             this.window.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Left half
         } else if (this.cursorX > screenWidth - os.edgeDetection) {

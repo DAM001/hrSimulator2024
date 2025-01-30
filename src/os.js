@@ -47,7 +47,7 @@ class OperatingSystem {
 
     // Window logic
     snapPreview;
-    edgeDetection = 100;
+    edgeDetection = 60;
 
     setupSnapPreview() {
         this.snapPreview = document.querySelector('.snap-preview');
@@ -75,6 +75,7 @@ class OperatingSystem {
             this.snapPreview.style.top = "calc(50% - (var(--taskbar-size) / 2) - 1px)"; // Bottom-right corner
         } else if (cursorY < this.edgeDetection) {
             this.snapPreview.style.width = "100%"; // Top half
+            this.snapPreview.style.height = "calc(100% - var(--taskbar-size) - 1px)";
         } else if (cursorX < this.edgeDetection) {
             this.snapPreview.style.height = "calc(100% - var(--taskbar-size) - 2px)"; // Left half
         } else if (cursorX > screenWidth - this.edgeDetection) {
