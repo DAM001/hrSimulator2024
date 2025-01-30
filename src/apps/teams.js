@@ -3,7 +3,6 @@ class Teams extends Application {
 
     constructor(name, icon) {
         super(name, icon);
-        this.users = new Map();
         this.selectedUser = null;
     }
 

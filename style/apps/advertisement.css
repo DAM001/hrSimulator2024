@@ -1,0 +1,172 @@
+.advertisement1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+
+    h1 {
+        font-size: 48px;
+        margin: 0;
+        animation: advertisementFlash 0.5s infinite alternate, advertisementShake 0.5s infinite;
+    }
+    p {
+        font-size: 18px;
+        margin: 20px 0;
+        animation: advertisementBounce 1s infinite alternate;
+    }
+    .button {
+        background: #ff4081;
+        color: #fff;
+        padding: 20px 40px;
+        border: none;
+        border-radius: 10px;
+        font-size: 25px;
+        cursor: pointer;
+        animation: advertisementPulse 1s infinite alternate, advertisementWiggle 0.5s infinite;
+    }
+    .button:hover {
+        background: #ff79b0;
+        box-shadow: 0 0 20px #ff4081, 0 0 30px #ff4081;
+    }
+}
+
+.advertisement2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #0e0e0e;
+    color: #ffcc00;
+    text-align: center;
+    overflow: hidden;
+    
+    h1 {
+        font-size: 48px;
+        margin: 0;
+        animation: advertisementFlash 0.5s infinite alternate, advertisementShake 0.5s infinite;
+    }
+    p {
+        font-size: 20px;
+        margin: 15px 0;
+        animation: advertisementBounce 1s infinite alternate;
+    }
+    .timer {
+        font-size: 32px;
+        font-weight: bold;
+        color: #ff4c4c;
+        animation: advertisementPulse 1s infinite alternate;
+    }
+    .button {
+        background: #ffcc00;
+        color: #000;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 22px;
+        cursor: pointer;
+        animation: advertisementPulse 1s infinite alternate, advertisementWiggle 0.5s infinite;
+    }
+    .button:hover {
+        background: #ffd633;
+        box-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+    }
+}
+
+.advertisement3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #2a2a2a;
+    color: #00ff99;
+    text-align: center;
+    overflow: hidden;
+
+    h1 {
+        font-size: 50px;
+        margin: 0;
+        animation: advertisementFlash 0.5s infinite alternate, advertisementShake 0.5s infinite;
+    }
+    p {
+        font-size: 20px;
+        margin: 20px 0;
+        animation: advertisementBounce 1s infinite alternate;
+    }
+    .coins {
+        font-size: 36px;
+        font-weight: bold;
+        color: #ffd700;
+        animation: advertisementPulse 1s infinite alternate;
+    }
+    .button {
+        background: #00ff99;
+        color: #000;
+        padding: 18px 35px;
+        border: none;
+        border-radius: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        animation: advertisementPulse 1s infinite alternate, advertisementWiggle 0.5s infinite;
+    }
+    .button:hover {
+        background: #33ffbb;
+        box-shadow: 0 0 20px #00ff99, 0 0 30px #00ff99;
+    }
+}
+
+.advertisement4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(45deg, #8a2be2, #ff1493);
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    
+    h1 {
+        font-size: 50px;
+        margin: 0;
+        animation: advertisementFlash 0.5s infinite alternate, advertisementShake 0.5s infinite;
+    }
+    p {
+        font-size: 18px;
+        margin: 15px 0;
+        animation: advertisementBounce 1s infinite alternate;
+    }
+    .skin-preview {
+        width: 150px;
+        height: 150px;
+        background: url("skin-preview.png") no-repeat center/contain;
+        animation: advertisementPulse 1s infinite alternate;
+    }
+    .button {
+        background: #ff1493;
+        color: #fff;
+        padding: 15px 35px;
+        border: none;
+        border-radius: 12px;
+        font-size: 24px;
+        cursor: pointer;
+        animation: advertisementPulse 1s infinite alternate, advertisementWiggle 0.5s infinite;
+    }
+    .button:hover {
+        background: #ff66b2;
+        box-shadow: 0 0 20px #ff1493, 0 0 30px #ff1493;
+    }
+}
+
+@keyframes advertisementFlash { 0% { opacity: 1; } 100% { opacity: 0.5; } }
+@keyframes advertisementBounce { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+@keyframes advertisementPulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+@keyframes advertisementShake { 0%, 100% { transform: translate(0); } 25%, 75% { transform: translate(-5px, 0); } 50% { transform: translate(5px, 0); } }
+@keyframes advertisementWiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } }
+@keyframes advertisementBgChange { 0%, 100% { background-color: #121212; } 50% { background-color: #1e1e1e; } }

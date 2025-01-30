@@ -14,8 +14,23 @@ class Application {
     cursorY = 0;
     defaultWidth = 500;
     defaultHeight = 400;
+    resizeable = true;
 
-    constructor(name, icon) {
+    setWidth(width) {
+        this.window.style.width = width + "px";
+    }
+
+    setHeight(height) {
+        this.window.style.height = height + "px";
+    }
+
+    setResizeable(resizeable) {
+        this.resizeable = resizeable;
+
+        this.content.querySelector(".fullscreen-button").style.display = resizeable ? "block" : "none";
+    }
+
+    constructor(name, icon, showInStartMenu = true) {
         this.isOpen = false;
         this.data.name = name;
         this.data.icon = icon;
@@ -25,8 +40,7 @@ class Application {
         this.window = null;
         this.icon = null;
 
-        os.taskbar.addMenuIcon(this);
-
+        if (showInStartMenu) os.taskbar.addMenuIcon(this);
         os.applications.set(name, this);
     }
 
@@ -67,6 +81,9 @@ class Application {
         this.icon.addEventListener("click", () => {
             this.toggleWindow();
         });
+
+        //resizeable
+        windowHTML.querySelector(".fullscreen-button").style.display = this.resizeable ? "block" : "none";
 
         //animate when open
         setTimeout(() => {
@@ -120,6 +137,8 @@ class Application {
     }
 
     maximizeWindow() {
+        if (!this.resizeable) return;
+
         this.window.style.left = 0;
         this.window.style.top = 0;
         this.window.style.width = "100%";
@@ -177,6 +196,8 @@ class Application {
             if (this.isDragging) {
                 this.window.style.left = `${e.clientX - this.window.style.getPropertyValue('--left-pos')}px`;
                 this.window.style.top = `${e.clientY - this.window.style.getPropertyValue('--top-pos')}px`;
+
+                if (!this.resizeable) return;
                 os.showSnapPreview(this.cursorX, this.cursorY);
             }
         });
@@ -184,6 +205,8 @@ class Application {
         document.addEventListener('mouseup', () => {
             if (this.isDragging) {
                 this.isDragging = false;
+
+                if (!this.resizeable) return;
                 os.snapPreview.style.display = "none";
                 this.snapWindow();
             }

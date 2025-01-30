@@ -6,6 +6,7 @@ class GameManager {
         this.notifications = new Map(); // Store notifications
         this.emailTimer = null;
         this.notificationTimer = null;
+        this.adTimer = null;
     }
 
     startClock() {
@@ -20,6 +21,7 @@ class GameManager {
                 clearInterval(this.interval);
                 clearInterval(this.emailTimer);
                 clearInterval(this.notificationTimer);
+                clearInterval(this.adTimer);
                 this.onDayEnd();
             }
         }, 1000);
@@ -64,6 +66,19 @@ class GameManager {
         this.notificationTimer = setInterval(() => {
             this.generateRandomTeamsMessage();
         }, settings.upgrades.notificationRate || 7000); // Dynamically read from settings
+
+        this.adTimer = setInterval(() => {
+
+            let adId = 0;
+            while (true) {
+                if (os.applications.get("GoogleAd" + adId) === undefined) {
+                    new Advertisement("GoogleAd" + adId, "./assets/apps/ad.png", false);
+                    os.openApplication(os.applications.get("GoogleAd" + adId));
+                    break;
+                }
+                adId++;   
+            }
+        }, 17000);
     }
 
     generateRandomEmail() {
@@ -91,7 +106,7 @@ class GameManager {
                 const shuffledResponses = shuffleArray([...quickResponses]);
     
                 // Create and add the email
-                outlook.addEmail(
+                os.applications.get("Outlook").addEmail(
                     new Email({
                         from,
                         subject,
@@ -117,7 +132,7 @@ class GameManager {
         ];
     
         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        softMicroTeams.sendMessageToUser(randomUser, randomMessage);
+        os.applications.get("Teams").sendMessageToUser(randomUser, randomMessage);
     }    
 
     addNotification(notification) {
@@ -173,7 +188,7 @@ const gameManager = new GameManager();
 const os = new OperatingSystem();
 
 //Apps
-const outlook = new Outlook("Outlook", "./assets/email.png");
-const softMicroTeams = new Teams("SoftMicro Teams", "./assets/business.png");
+new Outlook("Outlook", "./assets/apps/email.png");
+new Teams("Teams", "./assets/apps/business.png");
 
 gameManager.startClock();
