@@ -66,6 +66,9 @@ class Outlook extends Application {
     renderEmailView() {
         const { from, cc, subject, content, date, deadline, quickResponses } = this.currentEmail;
         const isSentFolder = this.currentFolder === "sent";
+        if (!this.isWindowOpen()) {
+            os.openApplication(this);
+        }
         const emailList = this.content.querySelector("#email-list");
     
         emailList.innerHTML = `
