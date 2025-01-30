@@ -1,5 +1,4 @@
 class Teams extends Application {
-    users;
     selectedUser;
 
     constructor(name, icon) {
@@ -48,7 +47,7 @@ class Teams extends Application {
         // Highlight selected user in sidebar
         const profiles = this.content.querySelectorAll(".profile");
         profiles.forEach(profile => profile.classList.remove("active"));
-        element.classList.add("active");
+        if (element) element.classList.add("active");
 
         this.loadMessages();
     }
@@ -86,12 +85,14 @@ class Teams extends Application {
         if (user) {
             user.teamsMessages.set(`${Date.now()}`, content);
     
-            // Define the onClickAction for the notification
             const onClickAction = () => {
-                this.selectUser(user); // Select the user
-                this.loadMessages();        // Load the messages for the selected user
+                if (!this.isWindowOpen()) {
+                    os.openApplication(this);
+                }
     
-                // Ensure the Teams application window is open
+                this.selectUser(user);
+                this.loadMessages();
+    
                 if (!this.isWindowOpen()) {
                     os.openApplication(this);
                 } else if (!this.isWindowVisible()) {
@@ -99,15 +100,13 @@ class Teams extends Application {
                 }
             };
     
-            // Send the notification with the onClickAction
             this.sendNotification(`New Message from ${user.getName()}`, content, onClickAction);
     
-            // Reload messages if the target user is currently selected
             if (this.selectedUser === user) {
                 this.loadMessages();
             }
         } else {
-            console.error(`User "${user}" not found.`);
+            console.error(`User not found.`);
         }
     }    
     
