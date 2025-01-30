@@ -68,17 +68,20 @@ class GameManager {
         }, settings.upgrades.notificationRate || 7000); // Dynamically read from settings
 
         this.adTimer = setInterval(() => {
-
-            let adId = 0;
-            while (true) {
-                if (os.applications.get("GoogleAd" + adId) === undefined) {
-                    new Advertisement("GoogleAd" + adId, "./assets/apps/ad.png", false);
-                    os.openApplication(os.applications.get("GoogleAd" + adId));
-                    break;
-                }
-                adId++;   
-            }
+            this.generateRandomAdvertisement();
         }, 17000);
+    }
+
+    generateRandomAdvertisement() {
+        let adId = 0;
+        while (true) {
+            if (os.applications.get("GoogleAd" + adId) === undefined) {
+                new Advertisement("GoogleAd" + adId, "./assets/apps/ad.png", false);
+                os.openApplication(os.applications.get("GoogleAd" + adId));
+                break;
+            }
+            adId++;   
+        }
     }
 
     generateRandomEmail() {

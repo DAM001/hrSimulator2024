@@ -54,5 +54,11 @@ class Advertisement extends Application {
     
         const randomAd = ads[Math.floor(Math.random() * ads.length)];
         this.content.innerHTML = randomAd;
+
+        this.content.addEventListener('click', () => {
+            for (let i = 0; i < Math.floor(Math.random() * 4) + 2; i++) {
+                gameManager.generateRandomAdvertisement();
+            }
+        });
     }    
 }
