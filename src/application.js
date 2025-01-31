@@ -100,6 +100,8 @@ class Application {
 
         this.moveWindow();
 
+        this.window.style.zIndex = os.getWindowZIndex();
+
         return windowHTML;
     }
 
@@ -167,12 +169,13 @@ class Application {
             if (e.target.closest('.buttons')) return;
 
             this.isDragging = true;
-
+            
             const rect = this.window.getBoundingClientRect();
             const relativeX = (e.clientX - rect.left) / rect.width;
             const relativeY = (e.clientY - rect.top) / rect.height;
-
+            
             // Reset size
+            this.window.style.zIndex = os.getWindowZIndex();
             this.window.style.width = this.defaultWidth + "px";
             this.window.style.height = this.defaultHeight + "px";
 

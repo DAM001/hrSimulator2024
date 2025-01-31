@@ -4,6 +4,11 @@ class OperatingSystem {
     applications;
     settings;
     users;
+    windowZIndex = 0;
+
+    getWindowZIndex() {
+        return this.windowZIndex++;
+    }
 
     constructor() {
         this.container = document.querySelector(".viewport");
