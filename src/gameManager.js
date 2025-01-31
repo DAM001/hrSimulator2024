@@ -105,13 +105,21 @@ class GameManager {
                 const randomEmail = emails[Math.floor(Math.random() * emails.length)];
                 const { from, subject, content, deadline, quickResponses } = randomEmail;
     
+                // Check if the sender exists in os.users
+                let sender = Array.from(os.users.values()).find(user => user.email === from);
+                
+                // If sender does not exist, create the user
+                if (!sender) {
+                    sender = os.createUser({ email: from });
+                }
+    
                 // Shuffle the quick responses
                 const shuffledResponses = shuffleArray([...quickResponses]);
     
                 // Create and add the email
                 os.applications.get("Outlook").addEmail(
                     new Email({
-                        from,
+                        from: sender,
                         subject,
                         content,
                         deadline,
@@ -120,7 +128,8 @@ class GameManager {
                 );
             })
             .catch((error) => console.error("Error loading emails:", error));
-    }            
+    }
+               
 
     generateRandomTeamsMessage() {
         // get a random member from os.users map
@@ -189,6 +198,23 @@ class GameManager {
 const settings = new Settings
 const gameManager = new GameManager();
 const os = new OperatingSystem();
+
+os.users.set("User", new SystemUser("User", "Name", "defaultUser", "user.name@company.com", "11/09/2001", "HR"));
+
+os.createUser({email:"aron.fernbach@company.com",firstName:"Aaron", lastName:"Fern", title:"Team Lead"} )
+os.createUser({email:"ella.woods@company.com", firstName:"Ella", lastName:"Woods", title:"Marketing Manager"});
+os.createUser({email:"mark.jones@company.com", firstName:"Mark", lastName:"Jones", title:"IT Support Specialist"});
+os.createUser({email:"john.doe@company.com", firstName:"John", lastName:"Doe", title:"CEO"});
+os.createUser({email:"sophia.hale@company.com", firstName:"Sophia", lastName:"Hale", title:"Legal Counsel"});
+os.createUser({email:"jacob.miller@company.com", firstName:"Jacob", lastName:"Miller", title:"Finance Manager"});
+os.createUser({email:"rachel.adams@company.com", firstName:"Rachel", lastName:"Adams", title:"Project Manager"});
+os.createUser({email:"tom.scott@company.com", firstName:"Tom", lastName:"Scott", title:"Facilities Manager"});
+os.createUser({email:"aaron.bennett@company.com", firstName:"Aaron", lastName:"Bennett", title:"Team Lead"});
+os.createUser({email:"samantha.lee@company.com", firstName:"Samantha", lastName:"Lee", title:"Customer Support Lead"});
+os.createUser({email:"nathan.green@company.com", firstName:"Nathan", lastName:"Green", title:"Operations Manager"});
+os.createUser({email:"linda.clark@company.com", firstName:"Linda", lastName:"Clark", title:"Product Manager"});
+os.createUser({email:"chris.morgan@company.com", firstName:"Chris", lastName:"Morgan", title:"Facilities Coordinator"});
+os.createUser({email:"hr.manager@company.com", firstName:"Emma", lastName:"Taylor", title:"HR Manager"});
 
 //Apps
 new Outlook("Outlook", "./assets/apps/email.png");

@@ -1,6 +1,6 @@
 [
     {
-      "from": "Boss",
+      "from": "aron.fernbach@company.com",
       "subject": "Overtime Approval Needed",
       "content": "We need extra hours this week to finish the project. Please confirm your availability for overtime this weekend.",
       "deadline": "Friday 6 PM",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "from": "HR",
+      "from": "hr.manager@company.com",
       "subject": "Annual Survey Reminder",
       "content": "Please complete the mandatory employee satisfaction survey. Your feedback helps us improve.",
       "deadline": "Next Monday",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "from": "Marketing",
+      "from": "Mella.woods@company.com",
       "subject": "Launch Party Ideas",
       "content": "We’re planning a product launch party next month. Share your creative ideas for the event.",
       "deadline": "End of the week",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "from": "IT Support",
+      "from": "mark.jones@company.com",
       "subject": "Password Policy Update",
       "content": "We’ve updated our password policy. All employees must change their passwords by the end of the day. Use a secure combination of letters, numbers, and symbols.",
       "deadline": "Today 5 PM",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "from": "CEO",
+      "from": "john.doe@company.com",
       "subject": "Vision Statement Feedback",
       "content": "Please review our updated company vision statement and share your feedback. It’s critical that it resonates with the entire team.",
       "deadline": "Thursday EOD",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "from": "Legal",
+      "from": "sophia.hale@company.com",
       "subject": "Contract Review Request",
       "content": "We need your review on the vendor contract. Ensure all terms are agreeable before signing.",
       "deadline": "Tomorrow 3 PM",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "from": "Finance",
+      "from": "jacob.miller@company.com",
       "subject": "Reimbursement Delay Apology",
       "content": "We’re experiencing delays in processing reimbursements. Apologies for the inconvenience, and thank you for your patience.",
       "deadline": "N/A",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "from": "Project Manager",
+      "from": "rachel.adams@company.com",
       "subject": "Sprint Retrospective",
       "content": "Join the sprint retrospective meeting tomorrow to discuss what went well and areas for improvement.",
       "deadline": "Tomorrow 11 AM",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "from": "Facilities",
+      "from": "tom.scott@company.com",
       "subject": "Office Renovation Feedback",
       "content": "We’re planning to renovate the office. Share your thoughts on what changes you’d like to see.",
       "deadline": "Friday",
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "from": "Team Lead",
+      "from": "aaron.bennett@company.com",
       "subject": "Bug Fix Priority",
       "content": "Please prioritize fixing the critical bugs reported in the latest release. The list is in the task tracker.",
       "deadline": "ASAP",
@@ -118,9 +118,9 @@
         { "text": "Can’t we just pretend they don’t exist?", "correct": false },
         { "text": "Bugs? What bugs? I see features.", "correct": false }
       ]
-    },
+    }, 
     {
-      "from": "Customer Support",
+      "from": "samantha.lee@company.com",
       "subject": "Critical Customer Complaint",
       "content": "A customer has reported a major issue with our service. Please investigate and resolve it immediately.",
       "deadline": "ASAP",
@@ -132,7 +132,7 @@
       ]
     },
     {
-        "from": "Operations Manager",
+        "from": "nathan.green@company.com",
         "subject": "Emergency Office Relocation",
         "content": "Dear Team,\n\nWe’ve had an unexpected situation at the office due to a burst water pipe. As a result, we need to relocate to the temporary coworking space downtown for the next two weeks. Please confirm your understanding and readiness to work from this new location. Also, let me know if you encounter any specific challenges or have preferences for desk assignments.\n\nThank you for your cooperation during this transition.\n\nBest,\nOperations Team",
         "deadline": "End of Day",
@@ -144,7 +144,7 @@
         ]
       },
       {
-        "from": "Product Development Team",
+        "from": "linda.clark@company.com",
         "subject": "Prototype Feedback Needed",
         "content": "Hi Team,\n\nWe’ve completed the initial prototype for the new mobile app. It’s ready for your review and testing. Please test the app for usability, design, and any potential bugs. Detailed feedback is crucial for the next iteration.\n\nKey questions to address:\n- Does the app’s navigation feel intuitive?\n- Are there any issues with responsiveness on different devices?\n- Do you have any suggestions for improving the user interface?\n\nPlease provide your feedback by replying to this email or uploading your comments to the shared folder by Thursday EOD.\n\nThanks in advance for your input.\n\nRegards,\nProduct Team",
         "deadline": "Thursday EOD",
@@ -156,7 +156,7 @@
         ]
       },
       {
-        "from": "Finance Department",
+        "from": "jacob.miller@company.com",
         "subject": "Budget Cut Announcement",
         "content": "Dear Team,\n\nDue to unforeseen financial constraints, we are implementing a temporary budget reduction across all departments. This will involve reduced travel allowances, a freeze on new equipment purchases, and a suspension of non-essential subscriptions.\n\nWe understand this may cause some inconveniences, and we encourage you to reach out if you have concerns or urgent needs that cannot wait until the next review period. We appreciate your understanding and commitment to navigating this challenging time together.\n\nPlease acknowledge this email and let us know if you have any immediate questions or concerns.\n\nRegards,\nFinance Team",
         "deadline": "Friday Noon",
@@ -168,7 +168,7 @@
         ]
       },
       {
-        "from": "HR Department",
+        "from": "hr.manager@company.com",
         "subject": "Mandatory Health & Safety Training",
         "content": "Dear All,\n\nAs part of our commitment to ensuring a safe and compliant workplace, all employees are required to complete a mandatory Health & Safety Training session. The training will cover topics such as fire safety, ergonomic practices, and emergency procedures.\n\nPlease select one of the following sessions to attend:\n1. Wednesday, 9:00 AM - 12:00 PM\n2. Thursday, 1:00 PM - 4:00 PM\n\nFailure to attend will result in non-compliance reporting. Kindly RSVP by the end of the day to secure your preferred slot.\n\nBest regards,\nHR Team",
         "deadline": "End of Day",
@@ -180,7 +180,7 @@
         ]
       },
       {
-        "from": "IT Support",
+        "from": "mark.jones@company.com",
         "subject": "Urgent: Password Reset Required",
         "content": "Dear Employee,\n\nWe’ve detected unusual activity on your account, and as a precaution, your password has been reset. To regain access, please follow these steps:\n1. Visit the company portal and select 'Forgot Password.'\n2. Answer your security questions.\n3. Set a new password that meets our security guidelines (minimum 12 characters, including symbols and numbers).\n\nPlease complete this process within 24 hours to avoid account suspension. If you encounter any issues, contact IT Support immediately.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nIT Support",
         "deadline": "24 Hours",
@@ -192,7 +192,7 @@
         ]
       },
       {
-        "from": "Marketing Team",
+        "from": "ella.woods@company.com",
         "subject": "Input Needed: New Brand Logo",
         "content": "Hello Team,\n\nWe’re in the process of redesigning our brand logo and would like your feedback. Attached are three potential designs (A, B, and C). Please review them and let us know:\n1. Which design you prefer and why.\n2. Any suggestions for improvement.\n\nYour input will be invaluable in ensuring our new branding resonates with both employees and clients. Please reply by the end of the week.\n\nThank you for your creativity and insights!\n\nBest,\nThe Marketing Team",
         "deadline": "End of the Week",
@@ -204,7 +204,7 @@
         ]
       },
       {
-        "from": "Team Lead",
+        "from": "aaron.bennett@company.com",
         "subject": "Weekly Performance Report Request",
         "content": "Hi Team,\n\nAs part of our ongoing efforts to streamline processes, I need everyone to submit their weekly performance reports by Friday at 3:00 PM. These reports should include:\n- Completed tasks and their outcomes.\n- Challenges encountered and how they were addressed.\n- Goals for the upcoming week.\n\nPlease ensure your submissions are concise yet comprehensive. If you need assistance or clarification, don’t hesitate to reach out.\n\nThanks for your hard work and dedication.\n\nBest regards,\n[Team Lead]",
         "deadline": "Friday, 3:00 PM",
@@ -216,7 +216,7 @@
         ]
       },
       {
-        "from": "Facilities Management",
+        "from": "chris.morgan@company.com",
         "subject": "Air Conditioning Maintenance",
         "content": "Dear Employees,\n\nPlease be informed that the office air conditioning system will undergo maintenance this Friday from 8:00 AM to 4:00 PM. During this time, the system will be turned off, and the indoor temperature may be higher than usual.\n\nWe recommend wearing lighter clothing and staying hydrated. Portable fans will be available upon request.\n\nThank you for your understanding as we work to ensure a comfortable environment for everyone.\n\nBest regards,\nFacilities Management",
         "deadline": "Friday",

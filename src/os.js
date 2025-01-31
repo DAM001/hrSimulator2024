@@ -17,10 +17,24 @@ class OperatingSystem {
         this.settings = new Settings();
         this.users = new Map();
 
-        this.setupUsers();
         this.setupSnapPreview();
     }
 
+    createUser({email="", firstName = "Default", lastName = "User", picture = "defaultUser", birthDate = "", title = "Prompt Engineer"} = {}) {if (!email) throw new Error("Email is required.");
+
+        function getRandomDate() {
+            const year = new Date().getFullYear() - Math.floor(Math.random() * (100 - 18 + 1)) - 18;
+            const month = Math.floor(Math.random() * 12) + 1;
+            const day = Math.floor(Math.random() * new Date(year, month, 0).getDate()) + 1;
+            return `${(month < 10 ? '0' : '') + month}/${(day < 10 ? '0' : '') + day}/${year}`;
+        }
+        
+        let user = new SystemUser(firstName, lastName, picture, email, birthDate || getRandomDate(), title)
+        os.users.set(email, user);
+
+        return user
+    }
+      
     openApplication(application) {
         if (application.isOpen) {
             if (!application.isWindowVisible()){
@@ -95,10 +109,5 @@ class OperatingSystem {
         } else {
             this.snapPreview.style.display = "none"; // Hide if not near edges
         }
-    }
-
-    setupUsers() {
-        this.users.set("BOSS", new SystemUser("Áron", "Fernbach", "defaultUser", "aron.fernbach@company.com", "01/01/1990", "Team Lead"));
-        this.users.set("CEO", new SystemUser("John", "Doe", "defaultUser", "john.doe@company.com", "01/01/1970", "CEO"));
     }
 }

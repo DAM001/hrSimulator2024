@@ -73,7 +73,7 @@ class Outlook extends Application {
     
         emailList.innerHTML = `
             <h2>${subject}</h2>
-            <p><strong>From:</strong> ${from || "Me"}</p>
+            <p><strong>From:</strong> ${from.getName() || "Me"}</p>
             ${cc ? `<p><strong>CC:</strong> ${cc}</p>` : ""}
             <p><strong>Date:</strong> ${date}</p>
             <p><strong>Deadline:</strong> ${deadline || "No deadline specified"}</p>
@@ -150,7 +150,7 @@ class Outlook extends Application {
             }
         };
     
-        this.sendNotification(`New Email from ${email.from}`, email.subject, onClickAction);
+        this.sendNotification(`New Email from ${email.from.getName()}`, email.subject, onClickAction);
     }
         
 
@@ -184,12 +184,13 @@ class Outlook extends Application {
             </div>`;
     
         this.content.querySelector("#send-email-btn").addEventListener("click", () => {
+            const from = os.users.get("User")
             const to = this.content.querySelector("#email-to").value;
             const cc = this.content.querySelector("#email-cc").value;
             const subject = this.content.querySelector("#email-subject").value;
             const content = this.content.querySelector("#email-content").value;
             if (to && subject && content) {
-                this.addEmail(new Email({ to, cc, subject, content }), "sent");
+                this.addEmail(new Email({ from, to, cc, subject, content }), "sent");
                 this.currentFolder = "sent";
                 this.renderEmails();
             } else alert("Please fill out all fields.");
@@ -201,9 +202,9 @@ class Outlook extends Application {
 
 class Email {
     constructor({
-        from = "",
-        to = "",
-        cc = "",
+        from = undefined,
+        to = undefined,
+        cc = [undefined],
         subject = "",
         content = "",
         deadline = "",
@@ -224,7 +225,7 @@ class Email {
     renderEmailItem(index) {
         const readClass = this.read ? "read" : "unread";
         return `<div class="email-item ${readClass}" data-index="${index}">
-                    <strong>${this.from || this.to}</strong> - ${this.subject}
+                    <strong>${this.from.getName() || this.to.getName()}</strong> - ${this.subject}
                     <span>${this.date}</span>
                 </div>`;
     }

@@ -25,31 +25,7 @@ class SystemUser {
         return this.firstName + " " + this.lastName;
     }
 
-    getFirstName() {
-        return this.firstName;
-    }
-
-    getLastName() {
-        return this.lastName;
-    }
-
     getPicture() {
         return "../assets/profilePictures/" + this.picture + ".png";
-    }
-
-    getPictureName() {
-        return this.picture;
-    }
-
-    getEmail() {
-        return this.email;
-    }
-
-    getBirthDate() {
-        return this.birthDate;
-    }
-
-    getTitle() {
-        return this.title;
     }
 }
