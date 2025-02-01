@@ -26,6 +26,6 @@ class SystemUser {
     }
 
     getPicture() {
-        return "../assets/profilePictures/" + this.picture + ".png";
+        return "./assets/profilePictures/" + this.picture + ".png";
     }
 }

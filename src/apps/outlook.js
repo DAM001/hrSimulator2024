@@ -130,6 +130,11 @@ class Outlook extends Application {
             console.error(`Invalid folder: ${folder}`);
             return;
         }
+    
+        if (folder === "sent") {
+            email.read = true; // Mark sent emails as read
+        }
+    
         this.folders[folder].push(email);
     
         // Only re-render if in the main folder view and the folder matches
@@ -137,20 +142,22 @@ class Outlook extends Application {
             this.renderEmails();
         }
     
-        const onClickAction = () => {
-            this.currentFolder = folder;
-            this.currentEmail = email;
-            this.renderEmailView();
+        if (folder === "inbox") {
+            const onClickAction = () => {
+                this.currentFolder = folder;
+                this.currentEmail = email;
+                this.renderEmailView();
     
-            // Ensure the Outlook application window is open
-            if (!this.isWindowOpen()) {
-                os.openApplication(this);
-            } else if (!this.isWindowVisible()) {
-                this.toggleWindow();
-            }
-        };
+                // Ensure the Outlook application window is open
+                if (!this.isWindowOpen()) {
+                    os.openApplication(this);
+                } else if (!this.isWindowVisible()) {
+                    this.toggleWindow();
+                }
+            };
     
-        this.sendNotification(`New Email from ${email.from.getName()}`, email.subject, onClickAction);
+            this.sendNotification(`New Email from ${email.from.getName()}`, email.subject, onClickAction);
+        }
     }
         
 
@@ -184,16 +191,22 @@ class Outlook extends Application {
             </div>`;
     
         this.content.querySelector("#send-email-btn").addEventListener("click", () => {
-            const from = os.users.get("User")
+            const from = os.users.get("User");
             const to = this.content.querySelector("#email-to").value;
             const cc = this.content.querySelector("#email-cc").value;
             const subject = this.content.querySelector("#email-subject").value;
             const content = this.content.querySelector("#email-content").value;
+    
             if (to && subject && content) {
-                this.addEmail(new Email({ from, to, cc, subject, content }), "sent");
-                this.currentFolder = "sent";
+                const email = new Email({ from, to, cc, subject, content });
+                email.read = true; // Mark sent emails as read
+                this.addEmail(email, "sent");
+    
+                this.currentFolder = "inbox"; // Switch to inbox after sending
                 this.renderEmails();
-            } else alert("Please fill out all fields.");
+            } else {
+                alert("Please fill out all fields.");
+            }
         });
     
         this.content.querySelector("#cancel-btn").addEventListener("click", () => this.renderEmails());
