@@ -94,7 +94,7 @@ class GameManager {
             return array;
         }
     
-        fetch('../assets/emails.json') // Fetch the emails.json file
+        fetch('assets/emails.json') // Fetch the emails.json file
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch emails.json: ${response.status}`);
