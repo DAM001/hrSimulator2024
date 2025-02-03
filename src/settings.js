@@ -2,6 +2,8 @@ class Settings {
     upgrades = {
         maxAllowedWindows: 1,
         groupNotifications: false,
+        emailRate: 10000,
+        notificationRate: 12000
     }
 
     config = {

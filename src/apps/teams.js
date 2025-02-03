@@ -1,8 +1,7 @@
 class Teams extends Application {
-    selectedUser;
-
     constructor(name, icon) {
         super(name, icon);
+        this.teamsMessages = {}; // Store messages by user's email
         this.selectedUser = null;
     }
 
@@ -15,7 +14,7 @@ class Teams extends Application {
     setupApplication() {
         const innerHTML = `
             <div class="window-content-teams">
-                <div class="sidebar"></div>
+                <div class="sidebar" id="teams-sidebar"></div>
                 <div class="chat">
                     <div class="messages" id="messagesContainer"></div>
                     <div class="input-bar">
@@ -28,16 +27,35 @@ class Teams extends Application {
 
         this.content.innerHTML = innerHTML;
 
-        // Render users in the sidebar
-        const sidebar = this.content.querySelector(".sidebar");
-        os.users.forEach(user => {
-            const userProfile = this.renderProfile("profile", user);
-            userProfile.addEventListener("click", () => this.selectUser(user, userProfile));
-            sidebar.appendChild(userProfile);
-        });
+        this.renderUserList(); // Render users dynamically
 
         // Send message button
         this.content.querySelector("#sendBtn").addEventListener("click", () => this.sendMessage());
+    }
+
+    renderUserList() {
+        const sidebar = this.content.querySelector("#teams-sidebar");
+        sidebar.innerHTML = ""; // Clear previous users
+
+        // Get the keys (user emails) that have at least one message
+        const usersWithMessages = Object.keys(this.teamsMessages).filter(
+            email => this.teamsMessages[email].length > 0
+        );
+
+        if (usersWithMessages.length === 0) {
+            sidebar.innerHTML = `<p>No active chats</p>`;
+            return;
+        }
+
+        usersWithMessages.forEach(email => {
+            // Get the user using the email as key
+            const user = os.users.get(email);
+            if (user) {
+                const userProfile = this.renderProfile("profile", user);
+                userProfile.addEventListener("click", () => this.selectUser(user, userProfile));
+                sidebar.appendChild(userProfile);
+            }
+        });
     }
 
     selectUser(user, element) {
@@ -55,17 +73,23 @@ class Teams extends Application {
         const messagesContainer = this.content.querySelector("#messagesContainer");
         messagesContainer.innerHTML = ""; // Clear previous messages
 
-        if (this.selectedUser) {
-            for (const [key, value] of this.selectedUser.teamsMessages.entries()) {
-                const messageDiv = document.createElement("div");
-                messageDiv.classList.add("message");
-                messageDiv.innerHTML = `
-                    ${value} 
-                    <span>${this.selectedUser.getName()} ${new Date(parseInt(key)).toLocaleTimeString()}</span>
-                `;
-                messagesContainer.appendChild(messageDiv);
-            }
+        // Use the user's email to retrieve messages
+        const messages = this.teamsMessages[this.selectedUser.email] || [];
+
+        if (messages.length === 0) {
+            messagesContainer.innerHTML = `<p>No messages yet.</p>`;
+            return;
         }
+
+        messages.forEach(({ sender, content, timestamp }) => {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+            messageDiv.innerHTML = `
+                <strong>${sender}</strong>: ${content}
+                <span>${new Date(timestamp).toLocaleTimeString()}</span>
+            `;
+            messagesContainer.appendChild(messageDiv);
+        });
     }
 
     sendMessage() {
@@ -73,17 +97,19 @@ class Teams extends Application {
         const messageContent = input.value.trim();
 
         if (messageContent && this.selectedUser) {
-            this.selectedUser.teamsMessages.set(`${Date.now()}`, messageContent);
-            this.loadMessages(); // Reload messages after adding new one
+            // Use selectedUser.email as the key and "You" as the sender name for messages you send
+            this.addMessage(this.selectedUser.email, "You", messageContent);
+            this.loadMessages();
             input.value = ""; // Clear input
         }
     }
 
-    // New Function: Send a message to a specific user and trigger a notification
+    // Send a message to a specific user and trigger a notification
     sendMessageToUser(user, content) {    
         if (user) {
-            user.teamsMessages.set(`${Date.now()}`, content);
-    
+            // Use the user's email as the key and user.getName() for display
+            this.addMessage(user.email, user.getName(), content);
+
             const onClickAction = () => {
                 if (!this.isWindowOpen()) {
                     os.openApplication(this);
@@ -98,7 +124,7 @@ class Teams extends Application {
                     this.toggleWindow();
                 }
             };
-    
+
             this.sendNotification(`New Message from ${user.getName()}`, content, onClickAction);
     
             if (this.selectedUser === user) {
@@ -106,6 +132,23 @@ class Teams extends Application {
             }
         } else {
             console.error(`User not found.`);
+        }
+    }
+
+    addMessage(userEmail, sender, content) {
+        if (!this.teamsMessages[userEmail]) {
+            this.teamsMessages[userEmail] = [];
+        }
+    
+        this.teamsMessages[userEmail].push({
+            sender: sender,
+            content: content,
+            timestamp: Date.now()
+        });
+    
+        // Update the sidebar if the Teams window is open
+        if (this.isWindowOpen()) {
+            this.renderUserList();
         }
     }    
     

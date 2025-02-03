@@ -130,23 +130,37 @@ class GameManager {
             .catch((error) => console.error("Error loading emails:", error));
     }
                
-
     generateRandomTeamsMessage() {
-        // get a random member from os.users map
-        const usersArray = Array.from(os.users.values());
-        const randomUser = usersArray[Math.floor(Math.random() * usersArray.length)];
-        const messages = [
-            "Hey, can you review the document?",
-            "Don't forget the meeting at 3 PM.",
-            "Here's the update on the project.",
-            "Let's sync up on the latest tasks.",
-            "Can you send me the report?"
-        ];
+        fetch('./assets/teamsMessages.json') // Fetch the teamsMessages.json file
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch teamsMessages.json: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((messages) => {
+                if (!messages.length) {
+                    console.warn("No messages found in teamsMessages.json.");
+                    return;
+                }
     
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        os.applications.get("Teams").sendMessageToUser(randomUser, randomMessage);
-    }    
-
+                const randomMessageData = messages[Math.floor(Math.random() * messages.length)];
+                const { from, content } = randomMessageData;
+    
+                // Check if the sender exists in os.users
+                let sender = Array.from(os.users.values()).find(user => user.email === from);
+    
+                // If sender does not exist, create the user
+                if (!sender) {
+                    sender = os.createUser({ email: from });
+                }
+    
+                // Send the message via the Teams app
+                os.applications.get("Teams").sendMessageToUser(sender, content);
+            })
+            .catch((error) => console.error("Error loading Teams messages:", error));
+    }
+        
     addNotification(notification) {
         if (this.notifications.has(notification.id)) return;
 

@@ -1,0 +1,22 @@
+[
+    {
+        "from": "ella.woods@company.com",
+        "content": "Hey, can you review the marketing strategy?"
+    },
+    {
+        "from": "mark.jones@company.com",
+        "content": "The IT system will be under maintenance tomorrow at 6 PM."
+    },
+    {
+        "from": "john.doe@company.com",
+        "content": "Join the company-wide meeting at 10 AM."
+    },
+    {
+        "from": "sophia.hale@company.com",
+        "content": "Need your approval on the new legal documents."
+    },
+    {
+        "from": "jacob.miller@company.com",
+        "content": "Reminder: Monthly budget report is due."
+    }
+]
